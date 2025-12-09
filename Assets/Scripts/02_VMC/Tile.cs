@@ -8,7 +8,7 @@ public class Tile : MonoBehaviour
     //  높이 정보 4단계
     public const float stepHeight = 0.25f;
 
-    public Vector3 centor { get { return new Vector3(pos.x, height * stepHeight, pos.y); } }
+    public Vector3 center { get { return new Vector3(pos.x, height * stepHeight, pos.y); } }
 
     //  타일 변형
     public void Grow()
