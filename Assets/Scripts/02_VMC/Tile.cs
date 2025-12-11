@@ -6,7 +6,7 @@ public class Tile : MonoBehaviour
     public Point pos;
     public int height;
     //  높이 정보 4단계
-    public const float stepHeight = 0.25f;
+    public const float stepHeight = 1f;
 
     public Vector3 center { get { return new Vector3(pos.x, height * stepHeight, pos.y); } }
 
