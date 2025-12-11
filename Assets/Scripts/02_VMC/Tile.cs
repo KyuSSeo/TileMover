@@ -27,6 +27,7 @@ public class Tile : MonoBehaviour
     //  타일 정보 가져오기
     public void Load(Point p, int h)
     {
+
         pos = p;
         height = h;
         Match();
