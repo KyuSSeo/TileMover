@@ -13,7 +13,7 @@ public class InputController : MonoBehaviour
     string[] _buttons = new string[] { "Fire1", "Fire2", "Fire3" };
 
 
-    public static event EventHandler<InfoEventArgs<int>> fireEvent;
+    public static event EventHandler<InfoEventArgs<int>> selEvent;
     public static event EventHandler<InfoEventArgs<Point>> moveEvent;
 
     void Update()
@@ -61,15 +61,15 @@ public class InputController : MonoBehaviour
         for (int i = 0; i < 3; ++i)
         {
             if (Input.GetButtonUp(_buttons[i]))
-                Fire(i);
+                Select(i);
         }
     }
 
 
-    private void Fire(int i)
+    private void Select(int i)
     {
-        if (fireEvent != null)
-            fireEvent(this, new InfoEventArgs<int>(i));
+        if (selEvent != null)
+            selEvent(this, new InfoEventArgs<int>(i));
     }
 
     private void Move(Point p)
