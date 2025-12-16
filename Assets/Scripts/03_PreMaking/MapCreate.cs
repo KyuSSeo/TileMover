@@ -29,7 +29,7 @@ public class MapCreate : MonoBehaviour
 
     [SerializeField] public int width = 10;
     [SerializeField] public int depth = 10;
-    [SerializeField] public int height = 8;
+    [SerializeField] public int height = 1;
     [SerializeField] public Point pos;
     [SerializeField] public MapData mapData;
 

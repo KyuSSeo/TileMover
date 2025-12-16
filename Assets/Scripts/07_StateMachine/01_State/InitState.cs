@@ -15,6 +15,6 @@ public class InitState : TurnState
         Point p = new Point((int)mapData.tiles[0].x, (int)mapData.tiles[0].z);
         SelectTile(p);
         yield return null;
-        owner.ChangeState<InitState>();
+        owner.ChangeState<MoveToTargetState>();
     }
 }

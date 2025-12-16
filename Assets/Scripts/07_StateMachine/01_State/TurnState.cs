@@ -10,6 +10,7 @@ public abstract class TurnState : State
     public MapData mapData { get { return owner.mapData; } }
     public Transform tileSelectionIndicator { get { return owner.tileSelectionIndicator; } }
     public Point pos { get { return owner.pos; } set { owner.pos = value; } }
+    public CamRig camRig { get { return owner.camRig; } }
 
     protected virtual void Awake()
     {
