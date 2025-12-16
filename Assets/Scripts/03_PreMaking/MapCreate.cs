@@ -115,6 +115,8 @@ public class MapCreate : MonoBehaviour
             for (int x = (int)rect.xMin; x < (int)rect.xMax; ++x)
             {
                 Point p = new Point(x, y);
+                if (tiles.ContainsKey(p))
+                    continue;
                 GrowSingle(p);
             }
         }
