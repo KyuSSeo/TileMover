@@ -1,5 +1,7 @@
 using System;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.XR;
 
 public class InputController : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class InputController : MonoBehaviour
 
     public static event EventHandler<InfoEventArgs<int>> selEvent;
     public static event EventHandler<InfoEventArgs<Point>> moveEvent;
+    public static event EventHandler<InfoEventArgs<Point>> TileselEvent;
     public static event EventHandler<InfoEventArgs<float>> cameraZoomEvent;
     public static event EventHandler<InfoEventArgs<Vector3>> cameraMoveEvent;
     public static event EventHandler<InfoEventArgs<Vector2>> cameraRotateEvent;
@@ -94,11 +97,19 @@ public class InputController : MonoBehaviour
                 isDoubleClicked = true;
                 doubleClickedTime = -1.0f;
 
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 // 레이케스트를 발사하여
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, 30f))
+                {
+                    Debug.Log(hit.collider.name);
+                    //TileselEvent?.Invoke(hit, new InfoEventArgs<Point>(hit.pos));
+                }
+                Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.red, 10f);
                 // 명중하는 타일의 Tile 정보를 가져옵니다.
                 // 가져온 Tile 정보는 다른 곳으로 전달합니다. << 어디? 
                 // 이렇게 가져온 타을은 타일의 제거, 추가 등의 기능을 위해 사용됩니다.
-                // 
 
                 isDoubleClicked = false;
             }
