@@ -14,7 +14,6 @@ public class InputController : MonoBehaviour
 
     private float interval = 0.25f;
     private float doubleClickedTime = -1.0f;
-    private bool isDoubleClicked = false;
 
     private string[] _buttons = new string[] { "Fire1", "Fire2", "Fire3" };
 
@@ -94,10 +93,8 @@ public class InputController : MonoBehaviour
         {
             if ((Time.time - doubleClickedTime) < interval)
             {
-                isDoubleClicked = true;
                 doubleClickedTime = -1.0f;
                 CheckTileClick();
-                isDoubleClicked = false;
             }
             else 
             {
