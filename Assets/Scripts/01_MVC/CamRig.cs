@@ -13,6 +13,7 @@ public class CamRig : MonoBehaviour
     public float maxZoom = 20f;
     public Vector3 targetOffset = Vector3.zero;
 
+    private float currentXRotation = 0f;
 
     void Awake()
     {
@@ -21,7 +22,7 @@ public class CamRig : MonoBehaviour
 
     void Update()
     {
-
+        OnMove();
     }
     
     private void OnMove()
@@ -56,8 +57,17 @@ public class CamRig : MonoBehaviour
     private void OnCameraRotate(object sender, InfoEventArgs<Vector2> e)
     {
         Vector2 rotateDelta = e.info;
+
+        float nextXRotation = currentXRotation + (rotateDelta.y * rotateSpeed);
+        
+        nextXRotation = Mathf.Clamp(nextXRotation, -30f, 30f); 
+
+        float rotationChange = nextXRotation - currentXRotation;
+
+        _transform.Rotate(Vector3.left, rotationChange, Space.Self);
         _transform.Rotate(Vector3.up, -rotateDelta.x * rotateSpeed, Space.World);
-        _transform.Rotate(Vector3.left, rotateDelta.y * rotateSpeed, Space.Self);
+
+        currentXRotation = nextXRotation;
     }
 
     private void OnCameraZoom(object sender, InfoEventArgs<float> e)
