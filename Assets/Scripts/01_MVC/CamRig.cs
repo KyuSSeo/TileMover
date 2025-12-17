@@ -20,23 +20,12 @@ public class CamRig : MonoBehaviour
         _transform = transform;
     }
 
-    void Update()
-    {
-        OnMove();
-    }
-    
-    private void OnMove()
-    {
-        if (target)
-            _transform.position = Vector3.Lerp(_transform.position, target.position, moveSpeed * Time.deltaTime);
-    }
-
-
     private void OnEnable()
     {
         InputController.cameraMoveEvent += OnCameraMove;
         InputController.cameraRotateEvent += OnCameraRotate;
         InputController.cameraZoomEvent += OnCameraZoom;
+        InputController.moveEvent += OnKeybordMove;
     }
 
     private void OnDisable()
@@ -45,10 +34,36 @@ public class CamRig : MonoBehaviour
         InputController.cameraMoveEvent -= OnCameraMove;
         InputController.cameraRotateEvent -= OnCameraRotate;
         InputController.cameraZoomEvent -= OnCameraZoom;
+        InputController.moveEvent -= OnKeybordMove;
+    }
+    private void OnKeybordMove(object sender, InfoEventArgs<Point> e)
+    {
+        if (target)
+        {
+            StopAllCoroutines();
+            StartCoroutine(MoveToTarget(target.position + targetOffset));
+        }
     }
 
+    private IEnumerator MoveToTarget(Vector3 targetPosition)
+    {
+        float duration = 0.5f;
+        float elapsed = 0f;
+
+        Vector3 startPosition = _transform.position;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            float t = elapsed / duration;
+            _transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            yield return null;
+        }
+        _transform.position = targetPosition;
+    }
     private void OnCameraMove(object sender, InfoEventArgs<Vector3> e)
     {
+        StopAllCoroutines();
         Vector3 dragDelta = e.info;
         Vector3 moveDelta = new Vector3(dragDelta.x, 0, dragDelta.y);
         _transform.Translate(moveDelta * moveSpeed * Time.deltaTime, Space.World);
@@ -56,6 +71,7 @@ public class CamRig : MonoBehaviour
 
     private void OnCameraRotate(object sender, InfoEventArgs<Vector2> e)
     {
+        StopAllCoroutines();
         Vector2 rotateDelta = e.info;
 
         float nextXRotation = currentXRotation + (rotateDelta.y * rotateSpeed);
