@@ -9,6 +9,11 @@ public class InputController : MonoBehaviour
 
     private float _horNext, _verNext;
     private bool _horHold, _verHold;
+
+    private float interval = 0.25f;
+    private float doubleClickedTime = -1.0f;
+    private bool isDoubleClicked = false;
+
     private string[] _buttons = new string[] { "Fire1", "Fire2", "Fire3" };
 
     public static event EventHandler<InfoEventArgs<int>> selEvent;
@@ -84,6 +89,17 @@ public class InputController : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
+            if ((Time.time - doubleClickedTime) < interval)
+            {
+                isDoubleClicked = true;
+                doubleClickedTime = -1.0f;
+                Debug.Log("더블클릭 내용!");
+                isDoubleClicked = false;
+            }
+            else 
+            {
+                doubleClickedTime = Time.time;
+            }
             dragOrigin = Input.mousePosition;
         }
 
@@ -95,8 +111,8 @@ public class InputController : MonoBehaviour
             cameraMoveEvent?.Invoke(this, new InfoEventArgs<Vector3>(dragDelta));
             dragOrigin = currentDrag;
         }
-
     }
+
     private void HandleMouseRight()
     {
         if (Input.GetMouseButton(1))
