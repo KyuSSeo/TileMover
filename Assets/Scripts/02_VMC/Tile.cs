@@ -5,9 +5,12 @@ public class Tile : MonoBehaviour
     //  위치와 높이 정보
     public Point pos;
     public int height;
+
+    // 타일 위에 무언가가 존재하는지 체크 
+    public bool isUse;
     //  높이 정보 4단계
     public const float stepHeight = 1f;
-
+    
     public Vector3 center { get { return new Vector3(pos.x, height * stepHeight, pos.y); } }
 
     //  타일 변형

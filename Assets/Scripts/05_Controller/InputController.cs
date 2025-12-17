@@ -93,7 +93,13 @@ public class InputController : MonoBehaviour
             {
                 isDoubleClicked = true;
                 doubleClickedTime = -1.0f;
-                Debug.Log("더블클릭 내용!");
+
+                // 레이케스트를 발사하여
+                // 명중하는 타일의 Tile 정보를 가져옵니다.
+                // 가져온 Tile 정보는 다른 곳으로 전달합니다. << 어디? 
+                // 이렇게 가져온 타을은 타일의 제거, 추가 등의 기능을 위해 사용됩니다.
+                // 
+
                 isDoubleClicked = false;
             }
             else 
