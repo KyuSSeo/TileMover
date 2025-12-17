@@ -1,16 +1,18 @@
 using UnityEngine;
+using System.Collections;
 
 public class CamRig : MonoBehaviour
 {
     private Transform _transform;
     public Transform target;
-    public float speed = 3f;
+    public float moveSpeed = 0.5f;
+    public float rotateSpeed = 3.0f;
+    public float zoomSpeed = 10.0f; 
+
+    public float minZoom = 5f;
+    public float maxZoom = 20f;
     public Vector3 targetOffset = Vector3.zero;
 
-    // 1. 턴이나 타일 선택을 기준오로 카메라의 기준점을 다시 설정합니다.
-    // 2. 마우스 좌클릭을 통해서 각도를 변경합니다.
-    // 3. 마우스 우클릭을 통해서 카메라 위치를 변경합니다.
-    // 4. 마우스 휠을 통해서 카메라의 거리를 변경합니다.
 
     void Awake()
     {
@@ -19,7 +21,49 @@ public class CamRig : MonoBehaviour
 
     void Update()
     {
+
+    }
+    
+    private void OnMove()
+    {
         if (target)
-            _transform.position = Vector3.Lerp(_transform.position, target.position, speed * Time.deltaTime);
+            _transform.position = Vector3.Lerp(_transform.position, target.position, moveSpeed * Time.deltaTime);
+    }
+
+
+    private void OnEnable()
+    {
+        InputController.cameraMoveEvent += OnCameraMove;
+        InputController.cameraRotateEvent += OnCameraRotate;
+        InputController.cameraZoomEvent += OnCameraZoom;
+    }
+
+    private void OnDisable()
+    {
+        // InputController 이벤트 구독 해제
+        InputController.cameraMoveEvent -= OnCameraMove;
+        InputController.cameraRotateEvent -= OnCameraRotate;
+        InputController.cameraZoomEvent -= OnCameraZoom;
+    }
+
+    private void OnCameraMove(object sender, InfoEventArgs<Vector3> e)
+    {
+        Vector3 dragDelta = e.info;
+        Vector3 moveDelta = new Vector3(dragDelta.x, 0, dragDelta.y);
+        _transform.Translate(moveDelta * moveSpeed * Time.deltaTime, Space.World);
+    }
+
+    private void OnCameraRotate(object sender, InfoEventArgs<Vector2> e)
+    {
+        Vector2 rotateDelta = e.info;
+        _transform.Rotate(Vector3.up, -rotateDelta.x * rotateSpeed, Space.World);
+        _transform.Rotate(Vector3.left, rotateDelta.y * rotateSpeed, Space.Self);
+    }
+
+    private void OnCameraZoom(object sender, InfoEventArgs<float> e)
+    {
+        float zoomDelta = e.info;
+        float newZoom = Mathf.Clamp(_transform.position.z + zoomDelta * zoomSpeed, minZoom, maxZoom);
+        _transform.Translate(Vector3.forward * zoomDelta * zoomSpeed * Time.deltaTime, Space.Self);
     }
 }
