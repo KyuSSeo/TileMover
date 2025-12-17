@@ -14,10 +14,12 @@ public class CamRig : MonoBehaviour
     public Vector3 targetOffset = Vector3.zero;
 
     private float currentXRotation = 0f;
+    private Quaternion initialRotation;
 
     void Awake()
     {
         _transform = transform;
+        initialRotation = _transform.rotation;
     }
 
     private void OnEnable()
@@ -30,7 +32,6 @@ public class CamRig : MonoBehaviour
 
     private void OnDisable()
     {
-        // InputController 이벤트 구독 해제
         InputController.cameraMoveEvent -= OnCameraMove;
         InputController.cameraRotateEvent -= OnCameraRotate;
         InputController.cameraZoomEvent -= OnCameraZoom;
@@ -51,16 +52,20 @@ public class CamRig : MonoBehaviour
         float elapsed = 0f;
 
         Vector3 startPosition = _transform.position;
+        Quaternion startRotation = _transform.rotation;
 
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
             _transform.position = Vector3.Lerp(startPosition, targetPosition, t);
+            _transform.rotation = Quaternion.Slerp(startRotation, initialRotation, t);
             yield return null;
         }
         _transform.position = targetPosition;
+        currentXRotation = 0f;
     }
+
     private void OnCameraMove(object sender, InfoEventArgs<Vector3> e)
     {
         StopAllCoroutines();
