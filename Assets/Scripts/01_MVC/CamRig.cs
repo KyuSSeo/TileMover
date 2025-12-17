@@ -12,9 +12,6 @@ public class CamRig : MonoBehaviour
     // 3. 마우스 우클릭을 통해서 카메라 위치를 변경합니다.
     // 4. 마우스 휠을 통해서 카메라의 거리를 변경합니다.
 
-    public bool isDrag = false;
-    
-
     void Awake()
     {
         _transform = transform;
