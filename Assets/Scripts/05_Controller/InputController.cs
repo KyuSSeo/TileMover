@@ -1,7 +1,5 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.XR;
 
 public class InputController : MonoBehaviour
 {
@@ -11,7 +9,6 @@ public class InputController : MonoBehaviour
 
     private float _horNext, _verNext;
     private bool _horHold, _verHold;
-
     private float interval = 0.25f;
     private float doubleClickedTime = -1.0f;
 
@@ -31,12 +28,10 @@ public class InputController : MonoBehaviour
 
     private void Update()
     {
-
         HandleKeyboardInput();
         HandleMouseLeft();
         HandleMouseRight();
         HandleMouseScroll();
-
     }
 
     private void HandleKeyboardInput()
