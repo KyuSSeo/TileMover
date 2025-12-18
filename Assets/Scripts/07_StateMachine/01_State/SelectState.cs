@@ -1,6 +1,4 @@
-using UnityEngine;
 using System.Collections;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public class SelectUnitState : TurnState
 {
