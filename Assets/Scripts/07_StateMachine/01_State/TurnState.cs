@@ -34,6 +34,11 @@ public abstract class TurnState : State
 
     }
 
+    protected virtual void OnFire(object sender, InfoEventArgs<int> e)
+    {
+
+    }
+
     protected virtual void OnSelect(object sender, InfoEventArgs<int> e)
     {
 

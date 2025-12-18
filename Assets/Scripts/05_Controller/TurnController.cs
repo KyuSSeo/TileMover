@@ -8,6 +8,9 @@ public class TurnController : StateMachine
     public Transform tileSelectionIndicator;
     public Point pos;
 
+    public GameObject charactor;
+    public Unit currentUnit;
+    public Tile currentTile { get { return board.GetTile(pos); } }
     void Start()
     {
         ChangeState<InitState>();
