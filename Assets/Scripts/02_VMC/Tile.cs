@@ -12,6 +12,8 @@ public class Tile : MonoBehaviour
     
     public Vector3 center { get { return new Vector3(pos.x, height * stepHeight, pos.y); } }
     
+    public Tile prevTile;
+    public int distance;
     
     //  타일 변형
     public void Grow()
