@@ -35,6 +35,7 @@ public class InitState : TurnState
 
             Movement m = instance.AddComponent(components[i]) as Movement;
             m.range = 5;
+            units.Add(unit);
         }
     }
 }

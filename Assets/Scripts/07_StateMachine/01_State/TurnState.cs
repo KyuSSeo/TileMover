@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEditor.Rendering;
 using Unity.VisualScripting;
+using System.Collections.Generic;
 
 public abstract class TurnState : State
 {
@@ -11,7 +12,8 @@ public abstract class TurnState : State
     public Transform tileSelectionIndicator { get { return owner.tileSelectionIndicator; } }
     public Point pos { get { return owner.pos; } set { owner.pos = value; } }
     public CamRig camRig { get { return owner.camRig; } }
-
+    public Turn turn { get { return owner.turn; } }
+    public List<Unit> units { get { return owner.units; } }
     protected virtual void Awake()
     {
         owner = GetComponent<TurnController>();
