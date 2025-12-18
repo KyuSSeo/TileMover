@@ -8,5 +8,10 @@ public enum Directions
     South = 2,
     West  = 3,
 }
-
+public enum States
+{
+    None = 0,
+    Selected = 1 << 0,
+    Locked = 1 << 1
+}
 
