@@ -8,6 +8,10 @@ public enum Directions
     South = 2,
     West  = 3,
 }
+
+
+
+[System.Flags]
 public enum States
 {
     None = 0,
