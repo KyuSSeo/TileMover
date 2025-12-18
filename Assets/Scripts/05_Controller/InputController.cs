@@ -136,8 +136,12 @@ public class InputController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
+            Unit selectedUnit = hit.collider.GetComponent<Unit>();
+            if (selectedUnit != null) 
+            {
+                Debug.Log($"유닛 선택: {selectedUnit.tile.pos}");
+            }
             Tile hitTile = hit.collider.GetComponent<Tile>();
-            Debug.DrawRay(transform.position, transform.forward * hit.distance, Color.red, 10f);
             if (hitTile != null)
             {
                 Debug.Log($"타일 선택: {hitTile.pos}");
