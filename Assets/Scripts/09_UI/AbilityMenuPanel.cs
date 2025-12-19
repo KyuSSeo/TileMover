@@ -1,41 +1,29 @@
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
 
 public class AbilityMenuPanel : MonoBehaviour
 {
-    [Header("UI References")]
-    public GameObject panelObject;
+    [Header("Inspector Linked UI")]
+    public GameObject panelObject; 
     public List<TextMeshProUGUI> menuOptions;
+    public Image selectionIndicator; 
 
-    [Header("Settings")]
-    public Color selectedColor = Color.yellow;
-    public Color normalColor = Color.white;
-
-    public void Show(string title, List<string> options)
+    public void Show(bool value)
     {
-        panelObject.SetActive(true);
+        panelObject.SetActive(value);
     }
 
-    public void Hide()
+    public void SetSelectionVisual(int index, Color selected, Color normal)
     {
-        panelObject.SetActive(false);
-    }
-
-    public void SetSelection(int index)
-    {
-        // 범위를 벗어나지 않게 처리
-        if (menuOptions.Count == 0) return;
-
         for (int i = 0; i < menuOptions.Count; i++)
         {
-            if (i == index)
+            menuOptions[i].color = (i == index) ? selected : normal;
+
+            if (i == index && selectionIndicator != null)
             {
-                menuOptions[i].color = selectedColor;
-            }
-            else
-            {
-                menuOptions[i].color = normalColor;
+                selectionIndicator.transform.position = menuOptions[i].transform.position + new Vector3(-30f, 0, 0);
             }
         }
     }
