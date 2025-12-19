@@ -15,6 +15,6 @@ public class SelectUnitState : TurnState
         index = (index + 1) % units.Count;
         turn.Change(units[index]);
         yield return null;
-        owner.ChangeState<CommandState>();
+        owner.ChangeState<CommandSelectionState>();
     }
 }

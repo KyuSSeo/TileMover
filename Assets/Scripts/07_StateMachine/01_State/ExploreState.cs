@@ -1,17 +1,18 @@
 using UnityEngine;
 using System.Collections;
+using static UnityEditor.PlayerSettings;
+using static UnityEngine.UI.GridLayoutGroup;
 
 public class ExploreState : TurnState
 {
-    public override void Enter()
-    {
-        base.Enter();
-        // 커서 활성화 등 초기화
-    }
-
     protected override void OnMove(object sender, InfoEventArgs<Point> e)
     {
-        // 카메라나 커서 이동 로직
         SelectTile(e.info + pos);
+    }
+
+    protected override void OnFire(object sender, InfoEventArgs<int> e)
+    {
+        if (e.info == 0)
+            owner.ChangeState<CommandSelectionState>();
     }
 }

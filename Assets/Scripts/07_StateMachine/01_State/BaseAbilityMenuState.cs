@@ -1,7 +1,8 @@
-using System.Collections.Generic;
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
-public abstract class ActBaseState : TurnState
+public abstract class BaseAbilityMenuState : TurnState
 {
     protected string menuTitle;
     protected List<string> menuOptions;
@@ -16,6 +17,7 @@ public abstract class ActBaseState : TurnState
     public override void Exit()
     {
         base.Exit();
+        abilityMenuPanelController.Hide();
     }
 
     protected override void OnFire(object sender, InfoEventArgs<int> e)
@@ -28,7 +30,10 @@ public abstract class ActBaseState : TurnState
 
     protected override void OnMove(object sender, InfoEventArgs<Point> e)
     {
-        // if (e.info.x > 0 || e.info.y < 0)
+        if (e.info.x > 0 || e.info.y < 0)
+            abilityMenuPanelController.Next();
+        else
+            abilityMenuPanelController.Previous();
     }
 
     protected abstract void LoadMenu();
