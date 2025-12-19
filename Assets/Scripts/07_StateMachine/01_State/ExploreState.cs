@@ -19,9 +19,8 @@ public class ExploreState : TurnState
     {
         if (e.info == 0) // 선택 키
         {
-            // 현재 타일에 유닛이 있으면 CommandState로 전환
             var unit = mapData.GetUnit(pos);
-            if (unit != null && !unit.turn.IsLocked) // 행동 안 한 유닛이면
+            if (unit != null && !unit.turn.IsLocked)
             {
                 owner.currentUnit = unit;
                 owner.ChangeState<CommandState>();
