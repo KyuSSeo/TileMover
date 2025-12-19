@@ -8,7 +8,7 @@ public class CommandSelectionState : BaseAbilityMenuState
     {
         if (menuOptions == null)
         {
-            menuTitle = "Commands";
+            menuTitle = "Cmd";
             menuOptions = new List<string>(3);
             menuOptions.Add("Move");
             menuOptions.Add("Action");
