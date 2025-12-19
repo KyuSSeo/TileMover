@@ -75,3 +75,4 @@ crashlytics-build.properties
 /[Aa]ssets/[Ss]treamingAssets/aa/*
 /Assets/Plugins/Demigiant
 /Assets/TextMesh Pro
+/Assets/Scripts/08_Extensions/UI/Anim
