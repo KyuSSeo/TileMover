@@ -5,7 +5,13 @@ using UnityEngine;
 public class MoveToTargetState : TurnState
 {
     List<Tile> tiles;
-
+    public override void Enter()
+    {
+        base.Enter();
+        Movement m = turn.actor.GetComponent<Movement>();
+        tiles = m.GetTilesInRange(board);
+        board.SelectTiles(tiles);
+    }
     protected override void OnMove(object sender, InfoEventArgs<Point> e)
     {
         SelectTile(e.info + pos);
