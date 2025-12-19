@@ -14,18 +14,4 @@ public class ExploreState : TurnState
         // 카메라나 커서 이동 로직
         SelectTile(e.info + pos);
     }
-
-    protected override void OnFire(object sender, InfoEventArgs<int> e)
-    {
-        if (e.info == 0) // 선택 키
-        {
-            var unit = mapData.GetUnit(pos);
-            if (unit != null && !unit.turn.IsLocked)
-            {
-                owner.currentUnit = unit;
-                owner.ChangeState<CommandState>();
-            }
-        }
-    }
-}
 }
