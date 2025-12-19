@@ -207,8 +207,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: e84ac77954e65b64e927f0e1694edb58, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -453,7 +453,7 @@ MonoBehaviour:
   charactor: {fileID: 845371849276412808, guid: 57a62fdc95894ec4f8b48be86adec0ce, type: 3}
   currentUnit: {fileID: 4467198324181041254, guid: 57a62fdc95894ec4f8b48be86adec0ce, type: 3}
   units: []
-  abilityMenuPanelController: {fileID: 0}
+  abilityMenuPanelController: {fileID: 1237751396}
 --- !u!4 &966851574
 Transform:
   m_ObjectHideFlags: 0
@@ -720,9 +720,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 347813251}
-  normalSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  selectedSprite: {fileID: 10901, guid: 0000000000000000f000000000000000, type: 0}
-  disabledSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+  normalSprite: {fileID: 21300000, guid: e84ac77954e65b64e927f0e1694edb58, type: 3}
+  selectedSprite: {fileID: 21300000, guid: 2db8a794cd72f334cb19eaba29dc6f90, type: 3}
+  disabledSprite: {fileID: 21300000, guid: b90bc4ef1ee418540b4423750fca61d8, type: 3}
   label: {fileID: 1468679958}
 --- !u!1 &1227947453
 GameObject:
@@ -924,6 +924,7 @@ GameObject:
   - component: {fileID: 1468679957}
   - component: {fileID: 1468679959}
   - component: {fileID: 1468679958}
+  - component: {fileID: 1468679960}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -970,7 +971,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: New Text
+  m_text: move
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -997,8 +998,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1049,6 +1050,21 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468679956}
   m_CullTransparentMesh: 1
+--- !u!114 &1468679960
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468679956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e19747de3f5aca642ab2be37e372fb86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_EffectColor: {r: 0, g: 0, b: 0, a: 0.5}
+  m_EffectDistance: {x: 1, y: -1}
+  m_UseGraphicAlpha: 1
 --- !u!1 &1478525606 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4337308925437116876, guid: bf056d904878d404ba01c74957e13ecf, type: 3}
@@ -1390,6 +1406,30 @@ PrefabInstance:
     - target: {fileID: 4323338808637955539, guid: bf056d904878d404ba01c74957e13ecf, type: 3}
       propertyPath: m_Name
       value: MenuPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5049565392829481326, guid: bf056d904878d404ba01c74957e13ecf, type: 3}
+      propertyPath: m_Pivot.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5049565392829481326, guid: bf056d904878d404ba01c74957e13ecf, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5049565392829481326, guid: bf056d904878d404ba01c74957e13ecf, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 5049565392829481326, guid: bf056d904878d404ba01c74957e13ecf, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5049565392829481326, guid: bf056d904878d404ba01c74957e13ecf, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5049565392829481326, guid: bf056d904878d404ba01c74957e13ecf, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5297574276820258903, guid: bf056d904878d404ba01c74957e13ecf, type: 3}
       propertyPath: m_AnchorMax.y
