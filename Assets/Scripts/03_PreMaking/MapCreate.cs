@@ -7,7 +7,8 @@ public class MapCreate : MonoBehaviour
 {
     [SerializeField] GameObject tileViewPrefab;
     [SerializeField] GameObject tileSelectionIndicatorPrefab;
- 
+    [SerializeField] GameObject unitPrefab; 
+
     private Transform _marker;
     #region transform marker
     public Transform marker
@@ -25,14 +26,13 @@ public class MapCreate : MonoBehaviour
     #endregion
 
     public Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
-        
+    public Dictionary<Point, Unit> units = new Dictionary<Point, Unit>();
 
     [SerializeField] public int width = 10;
     [SerializeField] public int depth = 10;
     [SerializeField] public int height = 1;
     [SerializeField] public Point pos;
     [SerializeField] public MapData mapData;
-
 
     public void GrowArea()
     {
@@ -56,6 +56,16 @@ public class MapCreate : MonoBehaviour
         ShrinkSingle(pos);
     }
 
+    public void AddUnit()
+    {
+        CreateUnit(pos);
+    }
+
+    public void RemoveUnit()
+    {
+        DeleteUnit(pos);
+    }
+
     public void UpdateMarker()
     {
         Tile t = tiles.ContainsKey(pos) ? tiles[pos] : null;
@@ -67,6 +77,7 @@ public class MapCreate : MonoBehaviour
         for (int i = transform.childCount - 1; i >= 0; --i)
             DestroyImmediate(transform.GetChild(i).gameObject);
         tiles.Clear();
+        units.Clear();
     }
 
     public void Save()
@@ -79,6 +90,12 @@ public class MapCreate : MonoBehaviour
         board.tiles = new List<Vector3>(tiles.Count);
         foreach (Tile t in tiles.Values)
             board.tiles.Add(new Vector3(t.pos.x, t.height, t.pos.y));
+
+        board.units = new List<Vector3>(units.Count);
+        foreach (Unit u in units.Values)
+        {
+            board.units.Add(new Vector3(u.tile.pos.x, 0, u.tile.pos.y));
+        }
 
         string fileName = string.Format("Assets/Resources/Levels/{1}.asset", filePath, name);
         AssetDatabase.CreateAsset(board, fileName);
@@ -95,6 +112,15 @@ public class MapCreate : MonoBehaviour
             Tile t = Create();
             t.Load(v);
             tiles.Add(t.pos, t);
+        }
+
+        if (mapData.units != null)
+        {
+            foreach (Vector3 v in mapData.units)
+            {
+                Point p = new Point((int)v.x, (int)v.z);
+                CreateUnit(p); // 해당 위치에 유닛 생성
+            }
         }
     }
 
@@ -139,6 +165,46 @@ public class MapCreate : MonoBehaviour
         GameObject instance = Instantiate(tileViewPrefab) as GameObject;
         instance.transform.parent = transform;
         return instance.GetComponent<Tile>();
+    }
+    public Unit CreateUnit(Point p)
+    {
+        // 1. 해당 위치에 타일이 없으면 유닛 배치 불가
+        if (!tiles.ContainsKey(p))
+            return null;
+
+        // 2. 이미 해당 위치에 유닛이 있으면 배치 불가
+        if (units.ContainsKey(p))
+            return units[p];
+
+        // 3. 유닛 생성
+        GameObject instance = Instantiate(unitPrefab) as GameObject;
+        instance.transform.parent = transform; // 맵 오브젝트 하위로 정리
+
+        Unit unit = instance.GetComponent<Unit>();
+        Tile t = tiles[p];
+
+        // 4. 유닛 배치
+        unit.Place(t);
+
+        // 5. 딕셔너리에 등록
+        units.Add(p, unit);
+
+        t.content = instance;
+
+        return unit;
+    }
+
+    public void DeleteUnit(Point p)
+    {
+        if (!units.ContainsKey(p))
+            return;
+
+        Unit unit = units[p];
+
+        if (unit.tile != null) unit.tile.content = null;
+
+        units.Remove(p);
+        DestroyImmediate(unit.gameObject);
     }
 
     public Tile GetOrCreate(Point p)

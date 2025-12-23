@@ -34,7 +34,8 @@ public class InitState : TurnState
             unit.DirMatch();
 
             Movement m = instance.AddComponent(components[i]) as Movement;
-            m.range = 5;
+            // 이동거리 
+            m.range = 10;
             units.Add(unit);
         }
     }
