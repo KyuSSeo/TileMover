@@ -10,9 +10,9 @@ public class CategorySelectionState : BaseAbilityMenuState
         {
             menuTitle = "Action";
             menuOptions = new List<string>(3);
-            menuOptions.Add("Attack");
-            menuOptions.Add("White Magic");
-            menuOptions.Add("Black Magic");
+            menuOptions.Add("Action1");
+            menuOptions.Add("Action2");
+            menuOptions.Add("Action3");
         }
 
         abilityMenuPanelController.Show(menuTitle, menuOptions);

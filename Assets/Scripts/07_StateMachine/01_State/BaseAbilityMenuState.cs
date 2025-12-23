@@ -22,6 +22,7 @@ public abstract class BaseAbilityMenuState : TurnState
 
     protected override void OnFire(object sender, InfoEventArgs<int> e)
     {
+        Debug.Log("Base OnFire");
         if (e.info == 0)
             Confirm();
         else

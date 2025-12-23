@@ -16,8 +16,10 @@ public class MoveToTargetState : TurnState
     {
         SelectTile(e.info + pos);
     }
+
     protected override void OnFire(object sender, InfoEventArgs<int> e)
     {
+        Debug.Log("Move OnFire");
         if (e.info == 0)
         {
             if (tiles.Contains(owner.currentTile))

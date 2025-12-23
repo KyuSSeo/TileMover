@@ -22,8 +22,8 @@ public class InitState : TurnState
 
     void SpawnTestUnits()
     {
-        System.Type[] components = new System.Type[] { typeof(WalkMovement)};
-        for (int i = 0; i < 1; ++i)
+        System.Type[] components = new System.Type[] { typeof(WalkMovement), typeof(WalkMovement) };
+        for (int i = 0; i < 2; ++i)
         {
             GameObject instance = Instantiate(owner.charactor) as GameObject;
 

@@ -21,9 +21,9 @@ public class InputController : MonoBehaviour
     public static event EventHandler<InfoEventArgs<Vector3>> cameraMoveEvent;
     public static event EventHandler<InfoEventArgs<Vector2>> cameraRotateEvent;
 
-
     private float vertical;
     private float horizontal;
+
     private Vector3 dragOrigin;
 
     private void Update()
@@ -78,7 +78,10 @@ public class InputController : MonoBehaviour
         for (int i = 0; i < 3; ++i)
         {
             if (Input.GetButtonUp(_buttons[i]))
+            {
                 Select(i);
+                Debug.Log("Key Selection Event");
+            }
         }
     }
 

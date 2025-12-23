@@ -6,13 +6,14 @@ public class CommandSelectionState : BaseAbilityMenuState
 {
     protected override void LoadMenu()
     {
+        Debug.Log("selection LoadMenu ");
         if (menuOptions == null)
         {
             menuTitle = "Cmd";
             menuOptions = new List<string>(3);
-            menuOptions.Add("Move");
-            menuOptions.Add("Action");
-            menuOptions.Add("Wait");
+            menuOptions.Add("Fire1");
+            menuOptions.Add("Fire2");
+            menuOptions.Add("Fire3");
         }
 
         abilityMenuPanelController.Show(menuTitle, menuOptions);
@@ -21,6 +22,7 @@ public class CommandSelectionState : BaseAbilityMenuState
     }
     protected override void Confirm()
     {
+        Debug.Log("selection Confirm ");
         switch (abilityMenuPanelController.selection)
         {
             case 0: // Move
