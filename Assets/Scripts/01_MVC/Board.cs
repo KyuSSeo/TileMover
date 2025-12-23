@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using System.Collections;
+using Unity.VisualScripting;
 
 public class Board : MonoBehaviour
 {
@@ -30,7 +32,6 @@ public class Board : MonoBehaviour
     }
 
     #region BFS
-
     public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile)
     {
         List<Tile> retValue = new List<Tile>();
@@ -43,26 +44,36 @@ public class Board : MonoBehaviour
 
         start.distance = 0;
         checkNow.Enqueue(start);
-
+        // 시작점 결정: start.distance = 0 설정 후 checkNow에 추가.
         while (checkNow.Count > 0)
         {
+            // 타일 확인 및 이웃 추가: checkNow에서 하나 꺼내(Dequeue) 4방향을 검사하고, 조건에 맞으면 checkNext에 넣습니다.
+
             Tile t = checkNow.Dequeue();
             for (int i = 0; i < 4; ++i)
             {
                 Tile next = GetTile(t.pos + dirs[i]);
+
+                // 방문한 타일 건너뛰기
                 if (next == null || next.distance <= t.distance + 1)
                     continue;
 
                 if (addTile(t, next))
                 {
+                    // "추가된 모든 타일의 거리는... 1만큼 더 크게 설정" → next.distance = t.distance + 1
                     next.distance = t.distance + 1;
+
+                    // "현재 타일은 이전 타일의 참조로 설정" → next.prevTile = t
                     next.prevTile = t;
                     checkNext.Enqueue(next);
                     retValue.Add(next);
                 }
-                if (checkNow.Count == 0)
-                    SwapReference(ref checkNow, ref checkNext);
             }
+            // 대기열 교환(Swap) : checkNow가 비었을 때(Count == 0) checkNext와 역할을 바꿉니다.
+
+            if (checkNow.Count == 0)
+                SwapReference(ref checkNow, ref checkNext);
+            // 루프 계속: checkNow에 아직 타일이 남아있다면 Swap 하지 않고 while문을 계속 돕니다.
         }
 
         return retValue;
@@ -74,6 +85,7 @@ public class Board : MonoBehaviour
         a = b;
         b = temp;
     }
+
     private void ClearSearch()
     {
         foreach (Tile t in tiles.Values)
@@ -100,6 +112,16 @@ public class Board : MonoBehaviour
     }
     #endregion
 
+
+    #region DFS
+
+    #endregion
+
+    #region Dijkstra
+    #endregion
+
+    #region A*
+    #endregion
     /*
      * 
      *  경로 탐색 방법은?
