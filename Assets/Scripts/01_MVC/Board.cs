@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System;
 using System.Collections;
 using Unity.VisualScripting;
+using UnityEngine.Splines.ExtrusionShapes;
 
 public class Board : MonoBehaviour
 {
     [SerializeField] private GameObject tilePrefab;
+    [SerializeField] private GameObject wallPrefab;
     public Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
     
     private Color selectedTileColor = new Color(0, 1, 1, 1);
@@ -28,6 +30,23 @@ public class Board : MonoBehaviour
             Tile t = instance.GetComponent<Tile>();
             t.Load(data.tiles[i]);
             tiles.Add(t.pos, t);
+        }
+
+        if (data.units != null)
+        {
+            for (int i = 0; i < data.units.Count; ++i)
+            {
+                GameObject instance = Instantiate(wallPrefab) as GameObject;
+                Unit u = instance.GetComponent<Unit>();
+
+                Point p = new Point((int)data.units[i].x, (int)data.units[i].z);
+
+                if (tiles.ContainsKey(p))
+                {
+                    Tile t = tiles[p];
+                    u.Place(t);
+                }
+            }
         }
     }
 

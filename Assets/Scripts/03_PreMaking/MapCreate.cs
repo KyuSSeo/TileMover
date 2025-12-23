@@ -100,6 +100,7 @@ public class MapCreate : MonoBehaviour
         string fileName = string.Format("Assets/Resources/Levels/{1}.asset", filePath, name);
         AssetDatabase.CreateAsset(board, fileName);
     }
+
     //  불러오기
     public void Load()
     {
@@ -166,27 +167,22 @@ public class MapCreate : MonoBehaviour
         instance.transform.parent = transform;
         return instance.GetComponent<Tile>();
     }
+
     public Unit CreateUnit(Point p)
     {
-        // 1. 해당 위치에 타일이 없으면 유닛 배치 불가
         if (!tiles.ContainsKey(p))
             return null;
 
-        // 2. 이미 해당 위치에 유닛이 있으면 배치 불가
         if (units.ContainsKey(p))
             return units[p];
 
-        // 3. 유닛 생성
         GameObject instance = Instantiate(unitPrefab) as GameObject;
-        instance.transform.parent = transform; // 맵 오브젝트 하위로 정리
+        instance.transform.parent = transform;
 
         Unit unit = instance.GetComponent<Unit>();
         Tile t = tiles[p];
 
-        // 4. 유닛 배치
         unit.Place(t);
-
-        // 5. 딕셔너리에 등록
         units.Add(p, unit);
 
         t.content = instance;

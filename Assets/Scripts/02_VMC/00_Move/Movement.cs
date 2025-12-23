@@ -42,7 +42,6 @@ public abstract class Movement : MonoBehaviour
         yield return transform.DOLocalRotate(dir.ToEuler(), 0.25f)
             .SetEase(Ease.InOutQuad)
             .WaitForCompletion();
-
         unit.dir = dir;
     }
 }
