@@ -6,6 +6,7 @@ public class CategorySelectionState : BaseAbilityMenuState
 {
     protected override void LoadMenu()
     {
+        Debug.Log("Category LoadMenu");
         if (menuOptions == null)
         {
             menuTitle = "Action";
@@ -20,6 +21,7 @@ public class CategorySelectionState : BaseAbilityMenuState
 
     protected override void Confirm()
     {
+        Debug.Log("Category Confirm");
         switch (abilityMenuPanelController.selection)
         {
             case 0:

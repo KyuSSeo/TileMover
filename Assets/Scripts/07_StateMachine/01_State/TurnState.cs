@@ -20,13 +20,13 @@ public abstract class TurnState : State
     protected override void AddListeners()
     {
         InputController.moveEvent += OnMove;
-        InputController.selEvent += OnSelect;
+        InputController.selEvent += OnFire;
     }
 
     protected override void RemoveListeners()
     {
         InputController.moveEvent -= OnMove;
-        InputController.selEvent -= OnSelect;
+        InputController.selEvent -= OnFire;
     }
 
     protected virtual void OnMove(object sender, InfoEventArgs<Point> e)
@@ -39,10 +39,6 @@ public abstract class TurnState : State
 
     }
 
-    protected virtual void OnSelect(object sender, InfoEventArgs<int> e)
-    {
-
-    }
 
     protected virtual void SelectTile(Point p)
     {
