@@ -30,7 +30,10 @@ public class BoardCreatorInspector : Editor
             current.Save();
         if (GUILayout.Button("Load"))
             current.Load();
-
+        if (GUILayout.Button("AddUnit"))
+            current.AddUnit();
+        if (GUILayout.Button("RemoveUnit"))
+            current.RemoveUnit();
         if (GUI.changed)
             current.UpdateMarker();
     }
