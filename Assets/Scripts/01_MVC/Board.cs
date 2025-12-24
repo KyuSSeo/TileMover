@@ -4,11 +4,15 @@ using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine.Splines.ExtrusionShapes;
+using Unity.Collections.LowLevel.Unsafe;
 
 public class Board : MonoBehaviour
 {
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private GameObject wallPrefab;
+    [SerializeField] private Material baseColor;
+    [SerializeField] private Material movedColor;
+
     public Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
     
     private Color selectedTileColor = new Color(0, 1, 1, 1);
@@ -49,8 +53,33 @@ public class Board : MonoBehaviour
             }
         }
     }
+    private void ClearSearch()
+    {
+        foreach (Tile t in tiles.Values)
+        {
+            t.prevTile = null;
+            t.distance = int.MaxValue;
+        }
+    }
+    public Tile GetTile(Point p)
+    {
+        return tiles.ContainsKey(p) ? tiles[p] : null;
+    }
+
+    public void SelectTiles(List<Tile> tiles)
+    {
+        for (int i = tiles.Count - 1; i >= 0; --i)
+            tiles[i].GetComponent<Renderer>().material.SetColor("_Color", selectedTileColor);
+    }
+
+    public void DeSelectTiles(List<Tile> tiles)
+    {
+        for (int i = tiles.Count - 1; i >= 0; --i)
+            tiles[i].GetComponent<Renderer>().material.SetColor("_Color", defaultTileColor);
+    }
 
     #region BFS
+    /*
     public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile)
     {
         List<Tile> retValue = new List<Tile>();
@@ -58,7 +87,7 @@ public class Board : MonoBehaviour
 
         ClearSearch();
         
-        Queue<Tile> checkNext = new Queue<Tile>();
+        Queue<Tile>      = new Queue<Tile>();
         Queue<Tile> checkNow = new Queue<Tile>();
 
         start.distance = 0;
@@ -104,36 +133,47 @@ public class Board : MonoBehaviour
         a = b;
         b = temp;
     }
+    */
 
-    private void ClearSearch()
-    {
-        foreach (Tile t in tiles.Values)
-        {
-            t.prevTile = null;
-            t.distance = int.MaxValue;
-        }
-    }
-    public Tile GetTile(Point p)
-    {
-        return tiles.ContainsKey(p) ? tiles[p] : null;
-    }
-
-    public void SelectTiles(List<Tile> tiles)
-    {
-        for (int i = tiles.Count - 1; i >= 0; --i)
-            tiles[i].GetComponent<Renderer>().material.SetColor("_Color", selectedTileColor);
-    }
-
-    public void DeSelectTiles(List<Tile> tiles)
-    {
-        for (int i = tiles.Count - 1; i >= 0; --i)
-            tiles[i].GetComponent<Renderer>().material.SetColor("_Color", defaultTileColor);
-    }
     #endregion
 
 
     #region DFS
+    public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile)
+    {
+        List<Tile> retValue = new List<Tile>();
+        retValue.Add(start);
 
+        ClearSearch();
+
+        Stack<Tile> stack = new Stack<Tile>();
+
+        start.distance = 0;
+        stack.Push(start);
+
+        while (stack.Count > 0)
+        {
+            // 가장 최근에 넣은 타일을 꺼냄
+            Tile t = stack.Pop();
+            retValue.Add(t);
+
+            for (int i = 0; i < 4; ++i)
+            {
+                Tile next = GetTile(t.pos + dirs[i]);
+
+                // distance 확인)
+                if (next != null && next.distance == int.MaxValue)
+                {
+                    next.distance = t.distance + 1;
+                    next.prevTile = t;
+
+                    // 발견 즉시 스택에 넣음 -> 다음 반복에서 바로 꺼내짐
+                    stack.Push(next);
+                }
+            }
+        }
+        return retValue;
+    }
     #endregion
 
     #region Dijkstra
