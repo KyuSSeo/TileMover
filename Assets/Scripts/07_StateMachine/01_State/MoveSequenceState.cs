@@ -12,6 +12,7 @@ public class MoveSequenceState : TurnState
         base.Enter();
         StartCoroutine("Sequence");
     }
+
     IEnumerator Sequence()
     {
         Movement m = turn.actor.GetComponent<Movement>();

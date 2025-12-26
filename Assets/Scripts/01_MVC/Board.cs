@@ -79,7 +79,9 @@ public class Board : MonoBehaviour
     }
 
     #region BFS
-    /*
+    
+    // 탐색 단계에서 Distance 를 Range 만큼 제한해준다.
+
     public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile)
     {
         List<Tile> retValue = new List<Tile>();
@@ -87,7 +89,7 @@ public class Board : MonoBehaviour
 
         ClearSearch();
         
-        Queue<Tile>      = new Queue<Tile>();
+        Queue<Tile> checkNext = new Queue<Tile>();
         Queue<Tile> checkNow = new Queue<Tile>();
 
         start.distance = 0;
@@ -133,13 +135,14 @@ public class Board : MonoBehaviour
         a = b;
         b = temp;
     }
-    */
+    
 
     #endregion
 
 
     #region DFS
-    public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile)
+    
+    public List<Tile> Search1(Tile start, Func<Tile, Tile, bool> addTile)
     {
         List<Tile> retValue = new List<Tile>();
         retValue.Add(start);
@@ -161,6 +164,9 @@ public class Board : MonoBehaviour
             {
                 Tile next = GetTile(t.pos + dirs[i]);
 
+                if (next == null || next.distance <= t.distance + 1)
+                    continue;
+
                 // distance 확인)
                 if (next != null && next.distance == int.MaxValue)
                 {
@@ -177,6 +183,19 @@ public class Board : MonoBehaviour
     #endregion
 
     #region Dijkstra
+
+    /* 다익스트라 알고리즘 작동원리 알아보기
+     * 베이스 : 우리가 찾는 최단 경로는 여러 가짓수의 최단 경로로 이루어져 있다.
+     * 가는 거리가 음수인 노드는 존재하지 않는 경우
+     * 경로탐색을 통해서 최단 거리를 갱신하는 방식이다.
+     * 
+     * 1. 출발 노드 설정 : 내 프로젝트의 경우 시작점, Unit스크립트가 점유중인 타일
+     * 2. 출발 노드 기준 최소 비용 노드 설정 : 노드 비용은 모두 1로 같다
+     * 3. 방문하지 않은 노드 중 가장 저렴한 노드 방문 : 노드 비용이 모두 1로 같은데
+     * 4. 해당 노드를 거쳐 특정한 노드로 가는 경우에 비용을 갱신
+     * 5. 위 과정에서 3 ~ 4를 반복 
+     *
+     */
     #endregion
 
     #region A*
