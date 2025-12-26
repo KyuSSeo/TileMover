@@ -78,7 +78,7 @@ public class Board : MonoBehaviour
     
     // 탐색 단계에서 Distance 를 Range 만큼 제한해준다.
 
-    public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile)
+    public List<Tile> Search1(Tile start, Func<Tile, Tile, bool> addTile)
     {
         List<Tile> retValue = new List<Tile>();
         retValue.Add(start);
@@ -141,7 +141,7 @@ public class Board : MonoBehaviour
 
     #region DFS
     
-    public List<Tile> Search1(Tile start, Func<Tile, Tile, bool> addTile)
+    public List<Tile> Search2(Tile start, Func<Tile, Tile, bool> addTile)
     {
         List<Tile> retValue = new List<Tile>();
         retValue.Add(start);
@@ -166,14 +166,19 @@ public class Board : MonoBehaviour
                 if (next == null || next.distance <= t.distance + 1)
                     continue;
 
-                // distance 확인)
+                // distance 확인
                 if (next != null && next.distance == int.MaxValue)
                 {
-                    next.distance = t.distance + 1;
-                    next.prevTile = t;
+                    if (addTile(t, next))
+                    {
 
-                    // 발견 즉시 스택에 넣음 -> 다음 반복에서 바로 꺼내짐
-                    stack.Push(next);
+                        //next.distance = t.distance + 1;
+                        next.distance = t.distance + t.movementCost;
+                        next.prevTile = t;
+
+                        // 발견 즉시 스택에 넣음 -> 다음 반복에서 바로 꺼내짐
+                        stack.Push(next);
+                    }
                 }
             }
         }
@@ -195,7 +200,7 @@ public class Board : MonoBehaviour
      * 5. 위 과정에서 3 ~ 4를 반복 
      *
      */
-    public List<Tile> Search2(Tile start, Func<Tile, Tile, bool> addTile) 
+    public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile) 
     {
         List<Tile> retValue = new List<Tile>();
         retValue.Add(start);
