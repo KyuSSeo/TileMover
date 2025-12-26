@@ -81,7 +81,7 @@ public class Board : MonoBehaviour
     {
         UnityEngine.Debug.Log("search 실행");
         // Search1 (BFS) 실행
-        // return Search1(start, addTile);
+        return Search1(start, addTile);
         // Search2 (DFS) 실행
         // return Search2(start, addTile);
         // Search3 (Dijkstra) 실행
@@ -311,7 +311,7 @@ public class Board : MonoBehaviour
      *  기존 노드는 탐색 완료 노드 리스트에 추가됩니다.
      *  
      */
-    public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile, Tile end)
+    public List<Tile> Search4(Tile start, Func<Tile, Tile, bool> addTile, Tile end)
     {
         UnityEngine.Debug.Log("A* 실행");
         List<Tile> retValue = new List<Tile>();
