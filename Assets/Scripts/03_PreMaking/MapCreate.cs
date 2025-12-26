@@ -249,6 +249,29 @@ public class MapCreate : MonoBehaviour
             DestroyImmediate(t.gameObject);
         }
     }
+    // 맵 전체 생성 및 랜덤 타입 적용
+    public void GenerateMap()
+    {
+        Clear();
+
+        for (int x = 0; x < width; ++x)
+        {
+            for (int y = 0; y < depth; ++y)
+            {
+                Point p = new Point(x, y);
+
+                // 타일 생성
+                GrowSingle(p);
+
+                // 랜덤 타일 타입 적용
+                if (tiles.ContainsKey(p))
+                {
+                    Tile t = tiles[p];
+                    t.tileType = (TileType)Random.Range(0, 5);
+                }
+            }
+        }
+    }
 
     //  맵 저장
     public void CreateSaveDirectory()

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Tile : MonoBehaviour
+public class Tile: MonoBehaviour
 {
     //  위치와 높이 정보
     public Point pos;
@@ -39,6 +39,26 @@ public class Tile : MonoBehaviour
             case TileType.Swamp:  tileColor.material.color = Color.black; break;
         }
     }
+
+    public void SetPathState(TilePathFinding tileFind)
+    {
+        Renderer tileColor = GetComponent<Renderer>();
+        if (tileColor == null) return;
+
+        switch (tileFind)
+        {
+            case TilePathFinding.None:
+                UpdateColor();
+                break;
+            case TilePathFinding.SelectedPath:
+                tileColor.material.color = Color.yellow;
+                break;
+            case TilePathFinding.ClosePath:
+                tileColor.material.color = Color.red;
+                break;
+        }
+    }
+
     //  타일 변형
     public void Grow()
     {

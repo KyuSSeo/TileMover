@@ -18,6 +18,13 @@ public enum TileType
     Swamp = 4,
 }
 
+public enum TilePathFinding
+{
+    None = 0,
+    SelectedPath = 1,
+    ClosePath = 2,
+}
+
 
 [System.Flags]
 public enum States
