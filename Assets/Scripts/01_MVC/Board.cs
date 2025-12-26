@@ -82,7 +82,7 @@ public class Board : MonoBehaviour
     
     // 탐색 단계에서 Distance 를 Range 만큼 제한해준다.
 
-    public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile)
+    public List<Tile> Search2(Tile start, Func<Tile, Tile, bool> addTile)
     {
         List<Tile> retValue = new List<Tile>();
         retValue.Add(start);
@@ -196,6 +196,51 @@ public class Board : MonoBehaviour
      * 5. 위 과정에서 3 ~ 4를 반복 
      *
      */
+    public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile) 
+    {
+        List<Tile> retValue = new List<Tile>();
+        retValue.Add(start);
+
+        ClearSearch();
+
+        List<Tile> openList = new List<Tile>();
+        openList.Add(start);
+        while (openList.Count > 0)
+        {
+            // 가장 가까운 타일 정렬
+            openList.Sort((x, y) => x.distance.CompareTo(y.distance));
+
+            Tile t = openList[0];
+            openList.RemoveAt(0);
+
+            // 결과 리스트에 없으면 추가
+            if (!retValue.Contains(t))
+                retValue.Add(t);
+
+            // 연결된 노드 방문
+            for (int i = 0; i < 4; ++i)
+            {
+                Tile next = GetTile(t.pos + dirs[i]);
+
+                if (next == null || !addTile(t, next))
+                    continue;
+
+                // 연결된 노드의 비용은 기존 비용 +1로 갱신
+                int newCost = t.distance + 1;
+
+                // 경로 갱신
+                if (newCost < next.distance)
+                {
+                    next.distance = newCost;
+                    next.prevTile = t; 
+
+                    if (!openList.Contains(next))
+                        openList.Add(next);
+                }
+            }
+        }
+        return retValue;
+    }
     #endregion
 
     #region A*
