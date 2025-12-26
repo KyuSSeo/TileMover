@@ -21,9 +21,9 @@ public class Tile : MonoBehaviour
             switch (tileType)
             {
                 case TileType.Normal: return 1;
-                case TileType.Snow: return 2;
-                case TileType.Bush: return 3;
-                case TileType.Swamp: return 5;
+                case TileType.Snow: return 3;
+                case TileType.Bush: return 5;
+                case TileType.Swamp: return 10;
                 default: return 1;
             }
         }
