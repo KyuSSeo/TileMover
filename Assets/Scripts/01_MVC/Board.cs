@@ -1,10 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using System.Collections;
-using Unity.VisualScripting;
-using UnityEngine.Splines.ExtrusionShapes;
-using Unity.Collections.LowLevel.Unsafe;
 
 public class Board : MonoBehaviour
 {
@@ -203,6 +199,8 @@ public class Board : MonoBehaviour
 
         ClearSearch();
 
+        
+
         List<Tile> openList = new List<Tile>();
         openList.Add(start);
         while (openList.Count > 0)
@@ -226,8 +224,10 @@ public class Board : MonoBehaviour
                     continue;
 
                 // 연결된 노드의 비용은 기존 비용 +1로 갱신
-                int newCost = t.distance + 1;
+                //(기존) int newCost = t.distance + 1;
 
+                // 비용은 타일 타입에 따라 갱신
+                int newCost = t.distance + next.movementCost;
                 // 경로 갱신
                 if (newCost < next.distance)
                 {

@@ -7,14 +7,38 @@ public class Tile : MonoBehaviour
     public int height;
 
     public GameObject content;
-    //  높이 정보 4단계
+    //  높이 정보
     public const float stepHeight = 1f;
     
     public Vector3 center { get { return new Vector3(pos.x, height * stepHeight, pos.y); } }
-    
     public Tile prevTile;
     public int distance;
-    
+    public TileType tileType = TileType.None;
+    public int movementCost
+    {
+        get
+        {
+            switch (tileType)
+            {
+                case TileType.Normal: return 1;
+                case TileType.Snow: return 2;
+                case TileType.Bush: return 3;
+                case TileType.Swamp: return 5;
+                default: return 1;
+            }
+        }
+    }
+    public void UpdateColor()
+    {
+        Renderer tileColor = GetComponent<Renderer>();
+        switch (tileType)
+        {
+            case TileType.Normal: tileColor.material.color = Color.gray; break;
+            case TileType.Snow:   tileColor.material.color = Color.white; break;
+            case TileType.Bush:   tileColor.material.color = Color.green; break;
+            case TileType.Swamp:  tileColor.material.color = Color.black; break;
+        }
+    }
     //  타일 변형
     public void Grow()
     {
@@ -32,7 +56,6 @@ public class Tile : MonoBehaviour
     //  타일 정보 가져오기
     public void Load(Point p, int h)
     {
-
         pos = p;
         height = h;
         Match();

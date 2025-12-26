@@ -11,10 +11,11 @@ public enum Directions
 
 public enum TileType
 {
-    None = 1,
-    snow = 2,
+    None = 0,
+    Normal = 1,
+    Snow = 2,
     Bush = 3,
-    swamp = 4,
+    Swamp = 4,
 }
 
 

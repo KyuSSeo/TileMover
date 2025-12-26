@@ -65,11 +65,19 @@ public class MapCreate : MonoBehaviour
     {
         DeleteUnit(pos);
     }
+    public void RandomizeTileType()
+    {
+        foreach (Tile tile in tiles.Values)
+        {
+            tile.tileType = (TileType)Random.Range(0, 4);
+            tile.UpdateColor();
+        }
+    }
 
     public void UpdateMarker()
     {
-        Tile t = tiles.ContainsKey(pos) ? tiles[pos] : null;
-        marker.localPosition = t != null ? t.center : new Vector3(pos.x, 0, pos.y);
+        Tile tile = tiles.ContainsKey(pos) ? tiles[pos] : null;
+        marker.localPosition = tile != null ? tile.center : new Vector3(pos.x, 0, pos.y);
     }
 
     public void Clear()
@@ -88,13 +96,13 @@ public class MapCreate : MonoBehaviour
 
         MapData board = ScriptableObject.CreateInstance<MapData>();
         board.tiles = new List<Vector3>(tiles.Count);
-        foreach (Tile t in tiles.Values)
-            board.tiles.Add(new Vector3(t.pos.x, t.height, t.pos.y));
+        foreach (Tile tile in tiles.Values)
+            board.tiles.Add(new Vector3(tile.pos.x, (float)tile.tileType, tile.pos.y));
 
         board.units = new List<Vector3>(units.Count);
-        foreach (Unit u in units.Values)
+        foreach (Unit unit in units.Values)
         {
-            board.units.Add(new Vector3(u.tile.pos.x, 0, u.tile.pos.y));
+            board.units.Add(new Vector3(unit.tile.pos.x, 0, unit.tile.pos.y));
         }
 
         string fileName = string.Format("Assets/Resources/Levels/{1}.asset", filePath, name);
@@ -111,7 +119,12 @@ public class MapCreate : MonoBehaviour
         foreach (Vector3 v in mapData.tiles)
         {
             Tile t = Create();
-            t.Load(v);
+            Point p = new Point((int)v.x, (int)v.z);
+
+            t.Load(p, 0);
+            t.tileType = (TileType)(int)v.y;
+            t.UpdateColor();
+
             tiles.Add(t.pos, t);
         }
 
