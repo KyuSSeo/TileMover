@@ -78,7 +78,7 @@ public class Board : MonoBehaviour
     
     // 탐색 단계에서 Distance 를 Range 만큼 제한해준다.
 
-    public List<Tile> Search2(Tile start, Func<Tile, Tile, bool> addTile)
+    public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile)
     {
         List<Tile> retValue = new List<Tile>();
         retValue.Add(start);
@@ -107,7 +107,10 @@ public class Board : MonoBehaviour
                 if (addTile(t, next))
                 {
                     // "추가된 모든 타일의 거리는... 1만큼 더 크게 설정" → next.distance = t.distance + 1
-                    next.distance = t.distance + 1;
+                    // (기존) next.distance = t.distance + 1;
+                    
+                    // 타일 타입에 따라 이동경로 가중치 
+                    next.distance = t.distance + next.movementCost;
 
                     // "현재 타일은 이전 타일의 참조로 설정" → next.prevTile = t
                     next.prevTile = t;
@@ -192,7 +195,7 @@ public class Board : MonoBehaviour
      * 5. 위 과정에서 3 ~ 4를 반복 
      *
      */
-    public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile) 
+    public List<Tile> Search2(Tile start, Func<Tile, Tile, bool> addTile) 
     {
         List<Tile> retValue = new List<Tile>();
         retValue.Add(start);
