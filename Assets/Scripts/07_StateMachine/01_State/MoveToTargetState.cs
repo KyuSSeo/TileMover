@@ -9,8 +9,8 @@ public class MoveToTargetState : TurnState
     {
         base.Enter();
         Movement m = turn.actor.GetComponent<Movement>();
-        tiles = m.GetTilesInRange(board);
-        board.SelectTiles(tiles);
+        // tiles = m.GetTilesInRange(board);
+        // board.SelectTiles(tiles);
     }
     protected override void OnMove(object sender, InfoEventArgs<Point> e)
     {
@@ -22,8 +22,19 @@ public class MoveToTargetState : TurnState
         Debug.Log("Move OnFire");
         if (e.info == 0)
         {
+            //
+            Movement m = turn.actor.GetComponent<Movement>();
+            Tile to = board.GetTile(pos);
+            m.GetTilesInRange(owner.board, to);
+            owner.ChangeState<MoveSequenceState>();
+            //
+
+            /*
             if (tiles.Contains(owner.currentTile))
+            {
                 owner.ChangeState<MoveSequenceState>();
+            }
+            */
         }
         else
         {

@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using System.Diagnostics;
-using UnityEngine.Profiling;
+using UnityEngine;
 
 public class Board : MonoBehaviour
 {
@@ -78,12 +77,23 @@ public class Board : MonoBehaviour
         for (int i = tiles.Count - 1; i >= 0; --i)
             tiles[i].GetComponent<Renderer>().material.SetColor("_Color", defaultTileColor);
     }
+    public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile)
+    {
+        UnityEngine.Debug.Log("search 실행");
+        // Search1 (BFS) 실행
+        // return Search1(start, addTile);
+        // Search2 (DFS) 실행
+        // return Search2(start, addTile);
+        // Search3 (Dijkstra) 실행
+        // return Search3(start, addTile);
+        return null;
+    }
 
     #region BFS
 
     // 탐색 단계에서 Distance 를 Range 만큼 제한해준다.
 
-    public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile)
+    public List<Tile> Search1(Tile start, Func<Tile, Tile, bool> addTile)
     {
         List<Tile> retValue = new List<Tile>();
         retValue.Add(start);
@@ -153,7 +163,7 @@ public class Board : MonoBehaviour
 
     #region DFS
 
-    public List<Tile> Search1(Tile start, Func<Tile, Tile, bool> addTile)
+    public List<Tile> Search2(Tile start, Func<Tile, Tile, bool> addTile)
     {
         List<Tile> retValue = new List<Tile>();
         retValue.Add(start);
@@ -220,7 +230,7 @@ public class Board : MonoBehaviour
      * 5. 위 과정에서 3 ~ 4를 반복 
      *
      */
-    public List<Tile> Search2(Tile start, Func<Tile, Tile, bool> addTile)
+    public List<Tile> Search3(Tile start, Func<Tile, Tile, bool> addTile)
     {
         List<Tile> retValue = new List<Tile>();
         retValue.Add(start);
@@ -301,8 +311,9 @@ public class Board : MonoBehaviour
      *  기존 노드는 탐색 완료 노드 리스트에 추가됩니다.
      *  
      */
-    public List<Tile> Search3(Tile start, Tile end, Func<Tile, Tile, bool> addTile)
+    public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile, Tile end)
     {
+        UnityEngine.Debug.Log("A* 실행");
         List<Tile> retValue = new List<Tile>();
         retValue.Add(start);
 
@@ -330,6 +341,14 @@ public class Board : MonoBehaviour
             if (t == end)
             {
                 retValue.Add(t);
+                // 타이머 멈춤
+                stopwatch.Stop();
+                // 결과 확인 (밀리초 단위)
+                long pathFindTimeMs = stopwatch.ElapsedMilliseconds;
+                // 또는 정밀한 시간 간격 객체(TimeSpan)로 받기    
+                TimeSpan timeSpan = stopwatch.Elapsed;
+                UnityEngine.Debug.Log($"소모시간(Ms) : {pathFindTimeMs}");
+                UnityEngine.Debug.Log($"소모시간(Ticks) : {timeSpan}");
                 return retValue;
             }
             // 방문 완료 처리
@@ -357,14 +376,6 @@ public class Board : MonoBehaviour
                 }
             }
         }
-        // 타이머 멈춤
-        stopwatch.Stop();
-        // 결과 확인 (밀리초 단위)
-        long pathFindTimeMs = stopwatch.ElapsedMilliseconds;
-        // 또는 정밀한 시간 간격 객체(TimeSpan)로 받기
-        TimeSpan timeSpan = stopwatch.Elapsed;
-        UnityEngine.Debug.Log($"소모시간(Ms) : {pathFindTimeMs}");
-        UnityEngine.Debug.Log($"소모시간(Ticks) : {timeSpan}");
         return retValue;
     }
 
