@@ -9,6 +9,13 @@ public enum Directions
     West  = 3,
 }
 
+public enum TileType
+{
+    None = 1,
+    snow = 2,
+    Bush = 3,
+    swamp = 4,
+}
 
 
 [System.Flags]
