@@ -16,6 +16,8 @@ public class CamRig : MonoBehaviour
     private float currentXRotation = 0f;
     private Quaternion initialRotation;
 
+    private bool isFollowing = false;
+
     void Awake()
     {
         _transform = transform;
@@ -36,6 +38,24 @@ public class CamRig : MonoBehaviour
         InputController.cameraRotateEvent -= OnCameraRotate;
         InputController.cameraZoomEvent -= OnCameraZoom;
         InputController.moveEvent -= OnKeybordMove;
+    }
+    void LateUpdate()
+    {
+        if (target != null && isFollowing)
+        {
+            Vector3 desiredPosition = target.position + targetOffset;
+            _transform.position = Vector3.Lerp(_transform.position, desiredPosition, moveSpeed * Time.deltaTime);
+        }
+    }
+    public void FollowTarget(Transform newTarget)
+    {
+        StopAllCoroutines();
+        target = newTarget;
+        isFollowing = true;
+    }
+    public void EndFollowTarget()
+    {
+        isFollowing = false;
     }
     private void OnKeybordMove(object sender, InfoEventArgs<Point> e)
     {

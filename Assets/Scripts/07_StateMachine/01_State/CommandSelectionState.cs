@@ -7,6 +7,7 @@ public class CommandSelectionState : BaseAbilityMenuState
     protected override void LoadMenu()
     {
         Debug.Log("selection LoadMenu ");
+        owner.camRig.EndFollowTarget();
         if (menuOptions == null)
         {
             menuTitle = "Cmd";

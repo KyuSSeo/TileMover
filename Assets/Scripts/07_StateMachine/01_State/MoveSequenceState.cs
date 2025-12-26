@@ -11,6 +11,7 @@ public class MoveSequenceState : TurnState
     {
         base.Enter();
         StartCoroutine("Sequence");
+        owner.camRig.FollowTarget(owner.turn.actor.transform);
     }
 
     IEnumerator Sequence()
