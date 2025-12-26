@@ -313,8 +313,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 3365108360146080296, guid: f1e13828cbf21954c985b76fd846eeee, type: 3}
   wallPrefab: {fileID: 7183492937010877523, guid: 0f51b49a474704c4f8c13bdb401ed597, type: 3}
-  baseColor: {fileID: 0}
-  movedColor: {fileID: 0}
 --- !u!4 &828042878
 Transform:
   m_ObjectHideFlags: 0
@@ -440,7 +438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   camRig: {fileID: 1918520614}
   board: {fileID: 828042877}
-  mapData: {fileID: 11400000, guid: 955745aea6d1e954baf41379f54d79e5, type: 2}
+  mapData: {fileID: 11400000, guid: d622e3b363b2ea0459c5e8e9d98d554f, type: 2}
   tileSelectionIndicator: {fileID: 1627191674}
   pos:
     x: 0

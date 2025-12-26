@@ -8,6 +8,7 @@ public class SelectUnitState : TurnState
     {
         base.Enter();
         StartCoroutine("ChangeCurrentUnit");
+        owner.camRig.FollowTarget(owner.tileSelectionIndicator.transform);
     }
 
     IEnumerator ChangeCurrentUnit()

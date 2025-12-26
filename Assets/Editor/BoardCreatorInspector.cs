@@ -35,7 +35,7 @@ public class BoardCreatorInspector : Editor
         if (GUILayout.Button("RemoveUnit"))
             current.RemoveUnit();
         if (GUILayout.Button("GenerateMaxSizeMap"))
-            current.GenerateMap();
+            current.GenerateMap();  
         if (GUI.changed)
             current.UpdateMarker();
     }
