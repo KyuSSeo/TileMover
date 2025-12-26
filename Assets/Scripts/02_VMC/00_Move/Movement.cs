@@ -27,7 +27,10 @@ public abstract class Movement : MonoBehaviour
 
     protected virtual bool ExpandSearch(Tile from, Tile tile)
     {
-        return (from.distance + 1) <= range;
+        if (tile.content != null)
+            return false;
+
+        return (from.distance + tile.movementCost) <= range;
     }
 
     protected virtual void Filter(List<Tile> tiles)

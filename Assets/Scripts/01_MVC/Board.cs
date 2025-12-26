@@ -1,6 +1,6 @@
-using UnityEngine;
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Board : MonoBehaviour
 {
@@ -10,10 +10,10 @@ public class Board : MonoBehaviour
     [SerializeField] private Material movedColor;
 
     public Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
-    
+
     private Color selectedTileColor = new Color(0, 1, 1, 1);
     private Color defaultTileColor = new Color(1, 1, 1, 1);
-    
+
     private readonly Point[] dirs = new Point[4]
     {
         new Point(0, 1),
@@ -75,16 +75,16 @@ public class Board : MonoBehaviour
     }
 
     #region BFS
-    
+
     // 탐색 단계에서 Distance 를 Range 만큼 제한해준다.
 
-    public List<Tile> Search1(Tile start, Func<Tile, Tile, bool> addTile)
+    public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile)
     {
         List<Tile> retValue = new List<Tile>();
         retValue.Add(start);
 
         ClearSearch();
-        
+
         Queue<Tile> checkNext = new Queue<Tile>();
         Queue<Tile> checkNow = new Queue<Tile>();
 
@@ -108,7 +108,7 @@ public class Board : MonoBehaviour
                 {
                     // "추가된 모든 타일의 거리는... 1만큼 더 크게 설정" → next.distance = t.distance + 1
                     // (기존) next.distance = t.distance + 1;
-                    
+
                     // 타일 타입에 따라 이동경로 가중치 
                     next.distance = t.distance + next.movementCost;
 
@@ -134,13 +134,13 @@ public class Board : MonoBehaviour
         a = b;
         b = temp;
     }
-    
+
 
     #endregion
 
 
     #region DFS
-    
+
     public List<Tile> Search2(Tile start, Func<Tile, Tile, bool> addTile)
     {
         List<Tile> retValue = new List<Tile>();
@@ -200,17 +200,17 @@ public class Board : MonoBehaviour
      * 5. 위 과정에서 3 ~ 4를 반복 
      *
      */
-    public List<Tile> Search(Tile start, Func<Tile, Tile, bool> addTile) 
+    public List<Tile> Search1(Tile start, Func<Tile, Tile, bool> addTile)
     {
         List<Tile> retValue = new List<Tile>();
         retValue.Add(start);
 
         ClearSearch();
 
-        
-
         List<Tile> openList = new List<Tile>();
+        start.distance = 0;
         openList.Add(start);
+
         while (openList.Count > 0)
         {
             // 가장 가까운 타일 정렬
@@ -236,14 +236,19 @@ public class Board : MonoBehaviour
 
                 // 비용은 타일 타입에 따라 갱신
                 int newCost = t.distance + next.movementCost;
-                // 경로 갱신
-                if (newCost < next.distance)
-                {
-                    next.distance = newCost;
-                    next.prevTile = t; 
 
-                    if (!openList.Contains(next))
-                        openList.Add(next);
+                if (addTile(t, next))
+                {
+
+                    // 경로 갱신
+                    if (newCost < next.distance)
+                    {
+                        next.distance = newCost;
+                        next.prevTile = t;
+
+                        if (!openList.Contains(next))
+                            openList.Add(next);
+                    }
                 }
             }
         }
