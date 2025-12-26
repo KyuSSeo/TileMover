@@ -4,7 +4,7 @@ public class Tile : MonoBehaviour
 {
     //  위치와 높이 정보
     public Point pos;
-    public int height;
+    public int height = 1;
 
     public GameObject content;
     //  높이 정보
@@ -54,11 +54,13 @@ public class Tile : MonoBehaviour
     }
 
     //  타일 정보 가져오기
-    public void Load(Point p, int h)
+    public void Load(Point p, int tile)
     {
         pos = p;
-        height = h;
+        height = 1;
+        tileType = (TileType)tile;
         Match();
+        UpdateColor();
     }
 
     public void Load(Vector3 v)
@@ -69,7 +71,8 @@ public class Tile : MonoBehaviour
     // 시각적 업데이트를 위한 함수
     private void Match()
     {
-        transform.localPosition = new Vector3(pos.x, height * stepHeight / 2f, pos.y);
-        transform.localScale = new Vector3(1, height * stepHeight, 1);
-    }
+        float currentHeight = height * stepHeight;
+        transform.localPosition = new Vector3(pos.x, currentHeight / 2f, pos.y);
+        transform.localScale = new Vector3(1, currentHeight, 1);
+    }   
 }
