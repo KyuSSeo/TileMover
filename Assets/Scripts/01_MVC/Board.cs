@@ -36,6 +36,35 @@ public class Board : MonoBehaviour
             t.Load(data.tiles[i]);
             tiles.Add(t.pos, t);
         }
+        if (data.units != null)
+        {
+            for (int i = 0; i < data.units.Count; ++i)
+            {
+                // 좌표 설정
+                int x = (int)data.units[i].x;
+                int z = (int)data.units[i].z;
+                Point pos = new Point(x, z);
+
+                Tile targetTile = GetTile(pos);
+
+                // 예외 처리
+                if (targetTile == null || targetTile.content != null)
+                {
+                    UnityEngine.Debug.LogWarning($"지형지물 중복/오류 ({x}, {z})");
+                    continue;
+                }
+
+                // 생성
+                GameObject instance = Instantiate(wallPrefab) as GameObject;
+                Unit obj = instance.GetComponent<Unit>();
+
+                // 타일 점유 설정
+                obj.Place(targetTile);
+                Vector3 spawnPos = targetTile.center;
+                spawnPos.y += 0.5f;
+                instance.transform.position = spawnPos;
+            }
+        }
     }
 
     private void ClearSearch()

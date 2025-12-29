@@ -15,34 +15,11 @@ public class InitState : TurnState
         board.Load(mapData);
         Point p = new Point((int)mapData.tiles[0].x, (int)mapData.tiles[0].z);
         SelectTile(p);
-        LoadMapObj();
         SpawnTestUnits();
         yield return null;
         owner.ChangeState<SelectUnitState>();
     }
-    public void LoadMapObj()
-    {
-        for (int i = 0; i < mapData.units.Count; ++i)
-        {
-            //좌표 설정
-            int x = (int)mapData.units[i].x;
-            int y = (int)mapData.units[i].z;
-            Point pos = new Point(x, y);
-            Tile targetTile = board.GetTile(pos);
-            if (targetTile == null || targetTile.content != null)
-            {
-                UnityEngine.Debug.LogWarning($"중복 배치 또는 잘못된 타일 ({x}, {y})");
-                continue;
-            }
-            GameObject instance = Instantiate(board.wallPrefab) as GameObject;
-            Unit obj = instance.GetComponent<Unit>();
 
-            obj.Place(targetTile);
-            Vector3 spawnPos = targetTile.center;
-            spawnPos.y += 0.5f;
-            instance.transform.position = spawnPos;
-        }
-    }
     void SpawnTestUnits()
     {
         for (int i = 0; i < mapData.spawnPoints.Count; i++)
