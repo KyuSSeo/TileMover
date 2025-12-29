@@ -22,6 +22,29 @@ public class InitState : TurnState
 
     void SpawnTestUnits()
     {
+        for (int i = 0; i < mapData.spawnPoints.Count; i++)
+        {
+            // 유닛 오브젝트 생성
+            GameObject instance = Instantiate(owner.charactor) as GameObject;
+            
+            // 좌표 설정
+            int x = (int)mapData.spawnPoints[i].x;
+            int z = (int)mapData.spawnPoints[i].z;
+            Point pos = new Point(x, z);
+
+            // 유닛 배치
+            Unit unit = instance.GetComponent<Unit>();
+            unit.Place(board.GetTile(pos));
+            unit.DirMatch();
+
+            // 이동거리 설정
+            Movement moveRange = instance.AddComponent<WalkMovement>();
+            moveRange.range = (int)mapData.spawnPoints[i].y;
+            
+            // 턴 목록에 추가
+            units.Add(unit);
+        }
+        /* 기존 코드
         System.Type[] components = new System.Type[] { typeof(WalkMovement), typeof(WalkMovement) };
         for (int i = 0; i < 2; ++i)
         {
@@ -38,5 +61,6 @@ public class InitState : TurnState
             m.range = 500;
             units.Add(unit);
         }
+        */
     }
 }
