@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Tile: MonoBehaviour
+public class Tile : MonoBehaviour
 {
     //  위치와 높이 정보
     public Point pos;
@@ -28,6 +28,14 @@ public class Tile: MonoBehaviour
             }
         }
     }
+
+    // 게임 중 외부에서 타일 타입 변경 기술 사용했을 때 호출하기
+    public void UpdateTile(TileType input)
+    {
+        tileType = input;
+        UpdateColor();
+    }
+
     public void UpdateColor()
     {
         Renderer tileColor = GetComponent<Renderer>();
