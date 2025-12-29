@@ -8,7 +8,7 @@ using UnityEngine.Splines.ExtrusionShapes;
 public class Board : MonoBehaviour
 {
     [SerializeField] private GameObject tilePrefab;
-    [SerializeField] private GameObject wallPrefab;
+    [SerializeField] public GameObject wallPrefab;
 
     public Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
 
@@ -36,32 +36,8 @@ public class Board : MonoBehaviour
             t.Load(data.tiles[i]);
             tiles.Add(t.pos, t);
         }
-
-
-        if (data.units != null)
-        {
-
-            for (int i = 0; i < data.units.Count; ++i)
-            {
-                int x = (int)data.units[i].x;
-                int y = (int)data.units[i].z;
-                Point pos = new Point(x, y);
-                Tile targetTile = GetTile(pos);
-                if (targetTile == null || targetTile.content != null)
-                {
-                    UnityEngine.Debug.LogWarning($"중복 배치 또는 잘못된 타일 ({x}, {y})");
-                    continue;
-                }
-                GameObject instance = Instantiate(wallPrefab) as GameObject;
-                Unit obj = instance.GetComponent<Unit>();
-
-                if (tiles.ContainsKey(pos))
-                {
-                    obj.Place(targetTile);
-                }
-            }
-        }
     }
+
     private void ClearSearch()
     {
         stopwatch.Restart();
