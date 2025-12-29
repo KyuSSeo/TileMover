@@ -1,7 +1,9 @@
+using Mono.Cecil;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
+using UnityEngine.Splines.ExtrusionShapes;
 
 public class Board : MonoBehaviour
 {
@@ -35,19 +37,27 @@ public class Board : MonoBehaviour
             tiles.Add(t.pos, t);
         }
 
+
         if (data.units != null)
         {
+
             for (int i = 0; i < data.units.Count; ++i)
             {
-                GameObject instance = Instantiate(wallPrefab) as GameObject;
-                Unit u = instance.GetComponent<Unit>();
-
-                Point p = new Point((int)data.units[i].x, (int)data.units[i].z);
-
-                if (tiles.ContainsKey(p))
+                int x = (int)data.units[i].x;
+                int y = (int)data.units[i].z;
+                Point pos = new Point(x, y);
+                Tile targetTile = GetTile(pos);
+                if (targetTile == null || targetTile.content != null)
                 {
-                    Tile t = tiles[p];
-                    u.Place(t);
+                    UnityEngine.Debug.LogWarning($"중복 배치 또는 잘못된 타일 ({x}, {y})");
+                    continue;
+                }
+                GameObject instance = Instantiate(wallPrefab) as GameObject;
+                Unit obj = instance.GetComponent<Unit>();
+
+                if (tiles.ContainsKey(pos))
+                {
+                    obj.Place(targetTile);
                 }
             }
         }

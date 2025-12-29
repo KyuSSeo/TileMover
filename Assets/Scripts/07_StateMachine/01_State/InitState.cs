@@ -26,8 +26,8 @@ public class InitState : TurnState
         {
             // ÁÂÇ¥ ¼³Á¤
             int x = (int)mapData.spawnPoints[i].x;
-            int z = (int)mapData.spawnPoints[i].z;
-            Point pos = new Point(x, z);
+            int y = (int)mapData.spawnPoints[i].z;
+            Point pos = new Point(x, y);
             Tile targetTile = board.GetTile(pos);
 
             // À¯´Ö ¹èÄ¡
