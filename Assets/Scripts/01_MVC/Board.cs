@@ -81,12 +81,11 @@ public class Board : MonoBehaviour
     {
         UnityEngine.Debug.Log("search 角青");
         // Search1 (BFS) 角青
-        return Search1(start, addTile);
+        // return Search1(start, addTile);
         // Search2 (DFS) 角青
         // return Search2(start, addTile);
         // Search3 (Dijkstra) 角青
-        // return Search3(start, addTile);
-        return null;
+        return Search3(start, addTile);
     }
 
     #region BFS
