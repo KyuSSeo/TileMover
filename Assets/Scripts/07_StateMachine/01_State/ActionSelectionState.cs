@@ -5,11 +5,12 @@ using System.Collections.Generic;
 public class ActionSelectionState : BaseAbilityMenuState
 {
     public static int category;
-    string[] Options1 = new string[] { "Act1", "Act2", "Act3" };
-    string[] Options2 = new string[] { "Act1", "Act2", "Act3" };
+    string[] Options1 = new string[] { "Act1", "Act2", "Act3"};
+    string[] Options2 = new string[] { "Act1", "Act2"};
 
     protected override void LoadMenu()
     {
+        Debug.Log("ActionSelectionState");
         if (menuOptions == null)
             menuOptions = new List<string>(3);
 
@@ -27,11 +28,22 @@ public class ActionSelectionState : BaseAbilityMenuState
         abilityMenuPanelController.Show(menuTitle, menuOptions);
     }
 
+    // 세부 행동 추가
     protected override void Confirm()
     {
+        Debug.Log("Action Confirm");
         turn.hasUnitActed = true;
         if (turn.hasUnitMoved)
             turn.lockMove = true;
+        switch (abilityMenuPanelController.selection)
+        {
+            case 0:
+                //
+                break;
+            case 1:
+                // 
+                break;
+        }
         owner.ChangeState<CommandSelectionState>();
     }
 
