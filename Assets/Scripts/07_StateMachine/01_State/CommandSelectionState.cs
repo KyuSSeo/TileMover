@@ -12,9 +12,9 @@ public class CommandSelectionState : BaseAbilityMenuState
         {
             menuTitle = "Cmd";
             menuOptions = new List<string>(3);
-            menuOptions.Add("Fire1");
-            menuOptions.Add("Fire2");
-            menuOptions.Add("Fire3");
+            menuOptions.Add("Move");
+            menuOptions.Add("Act");
+            menuOptions.Add("Wait");
         }
 
         abilityMenuPanelController.Show(menuTitle, menuOptions);
@@ -26,13 +26,13 @@ public class CommandSelectionState : BaseAbilityMenuState
         Debug.Log("selection Confirm ");
         switch (abilityMenuPanelController.selection)
         {
-            case 0: // Move
+            case 0: // 이동
                 owner.ChangeState<MoveToTargetState>();
                 break;
-            case 1: // Action
+            case 1: // 행동
                 owner.ChangeState<CategorySelectionState>();
                 break;
-            case 2: // Wait
+            case 2: // 대기
                 owner.ChangeState<SelectUnitState>();
                 break;
         }

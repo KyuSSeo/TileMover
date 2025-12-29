@@ -10,27 +10,24 @@ public class CategorySelectionState : BaseAbilityMenuState
         if (menuOptions == null)
         {
             menuTitle = "Action";
-            menuOptions = new List<string>(3);
+            menuOptions = new List<string>(2);
             menuOptions.Add("Action1");
             menuOptions.Add("Action2");
-            menuOptions.Add("Action3");
         }
 
         abilityMenuPanelController.Show(menuTitle, menuOptions);
     }
 
+    // 여기에서 행동을 추가합니다.
     protected override void Confirm()
     {
         Debug.Log("Category Confirm");
         switch (abilityMenuPanelController.selection)
         {
             case 0:
-                Attack();
-                break;
-            case 1:
                 SetCategory(0);
                 break;
-            case 2:
+            case 1:
                 SetCategory(1);
                 break;
         }
