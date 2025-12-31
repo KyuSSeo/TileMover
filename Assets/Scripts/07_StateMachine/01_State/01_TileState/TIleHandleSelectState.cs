@@ -22,16 +22,12 @@ public class TileeHandleSelectState : BaseAbilityMenuState
     {
         switch (abilityMenuPanelController.selection)
         {
-            case 0:
-                {
-                    owner.ChangeState<TileBuildState>();
-                    break;
-                }
-            case 1:
-                {
-                    owner.ChangeState<TileRemoveState>();
-                    break;
-                }
+            case 0: // Build
+                SetTileAction(0);
+                break;
+            case 1: // Remove
+                SetTileAction(1);
+                break;
         }
     }
 
@@ -52,5 +48,10 @@ public class TileeHandleSelectState : BaseAbilityMenuState
         menuOptions.Clear();
         for (int i = 0; i < options.Length; ++i)
             menuOptions.Add(options[i]);
+    }
+    void SetTileAction(int type)
+    {
+        owner.subCategory = type;
+        owner.ChangeState<TileActionState>();
     }
 }

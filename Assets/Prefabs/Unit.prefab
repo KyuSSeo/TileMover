@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5417187169088577693}
   - component: {fileID: 47347644920656372}
   - component: {fileID: 7386215212509370215}
+  - component: {fileID: -3829321399431252545}
   m_Layer: 0
   m_Name: Unit
   m_TagString: Untagged
@@ -137,6 +138,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   range: 0
+--- !u!114 &-3829321399431252545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 845371849276412808}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22d400ed58eb7f54b8bd18d270848528, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obstaclePrefab: {fileID: 7183492937010877523, guid: 0f51b49a474704c4f8c13bdb401ed597, type: 3}
 --- !u!1 &7715680827961441151
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class TurnController : StateMachine
     public Turn turn = new Turn();
     public List<Unit> units = new List<Unit>();
     public AbilityMenuPanelController abilityMenuPanelController;
+    [HideInInspector] public int subCategory;
 
     public Tile currentTile { get { return board.GetTile(pos); } }
     void Start()

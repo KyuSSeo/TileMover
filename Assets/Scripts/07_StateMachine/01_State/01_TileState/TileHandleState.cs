@@ -2,50 +2,66 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileHandleState : TurnState
+public class TileActionState : TurnState
 {
-    List<Tile> tiles;
     TileObjectHandler handler;
+    List<Tile> tiles; // 선택된 타일 표시용 리스트
 
-    public override void Enter() 
+    public override void Enter()
     {
-        Debug.Log("Tile Handle State Enter");
         base.Enter();
         handler = turn.actor.GetComponent<TileObjectHandler>();
-        board.SelectTiles(tiles);
-        if (tiles != null && tiles.Count > 0)
-            board.SelectTiles(tiles);
+
+        string mode = (owner.subCategory == 0) ? "Build" : "Remove";
+        Debug.Log($"Tile Action State Enter: {mode}");
+
+        SelectTile(pos);
+        tiles = new List<Tile>();
+        RefreshRange();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        board.DeSelectTiles(tiles);
+        tiles.Clear();
     }
 
     protected override void OnMove(object sender, InfoEventArgs<Point> e)
     {
         SelectTile(e.info + pos);
+        RefreshRange();
     }
 
     protected override void OnFire(object sender, InfoEventArgs<int> e)
     {
-        Debug.Log("TIle Select State OnFire");
         if (e.info == 0)
         {
             if (tiles.Contains(owner.currentTile))
             {
-                owner.ChangeState<CommandSelectionState>();
-                handler.BuildObstacle(owner.currentTile);
+                if (owner.subCategory == 0)
+                {
+                    handler.BuildObstacle(owner.currentTile);
+                }
+                else if (owner.subCategory == 1)
+                {
+                    handler.RemoveObstacle(owner.currentTile);
+                }
+
                 turn.hasUnitActed = true;
-            }
-        }
-        else if (e.info == 1)
-        {
-            if (tiles.Contains(owner.currentTile))
-            {
                 owner.ChangeState<CommandSelectionState>();
-                handler.RemoveObstacle(owner.currentTile);
-                turn.hasUnitActed = true;
             }
         }
         else
         {
             owner.ChangeState<TileeHandleSelectState>();
         }
+    }
+    void RefreshRange()
+    {
+        board.DeSelectTiles(tiles);
+        tiles.Clear();
+        tiles.Add(owner.currentTile);
+        board.SelectTiles(tiles);
     }
 }
