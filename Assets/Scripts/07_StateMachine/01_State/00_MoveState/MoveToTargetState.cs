@@ -7,6 +7,7 @@ public class MoveToTargetState : TurnState
     List<Tile> tiles;
     public override void Enter()
     {
+        Debug.Log("Enter MoveToTargetState");
         base.Enter();
         Movement m = turn.actor.GetComponent<Movement>();
         tiles = m.GetTilesInRange(board);
