@@ -40,7 +40,6 @@ public abstract class TurnState : State
 
     }
 
-
     protected virtual void SelectTile(Point p)
     {
         if (pos == p || !board.tiles.ContainsKey(p))

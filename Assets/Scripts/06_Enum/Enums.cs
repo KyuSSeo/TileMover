@@ -1,6 +1,15 @@
 using UnityEngine;
 
 
+
+public enum UnitType
+{
+    None = 0,
+    Player = 1,
+    enemy = 2,
+    obstacle = 3,
+}
+// 유닛의 방향
 public enum Directions
 {
     North = 0,
@@ -9,6 +18,7 @@ public enum Directions
     West  = 3,
 }
 
+// 타일의 이동 소모값
 public enum TileType
 {
     None = 0,
@@ -18,6 +28,7 @@ public enum TileType
     Swamp = 4,
 }
 
+// 이동 알고리즘 테스트용 변수
 public enum TilePathFinding
 {
     None = 0,
@@ -26,6 +37,7 @@ public enum TilePathFinding
 }
 
 
+// 행동여부 판단용도
 [System.Flags]
 public enum States
 {

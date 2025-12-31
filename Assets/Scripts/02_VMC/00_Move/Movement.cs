@@ -46,28 +46,4 @@ public abstract class Movement : MonoBehaviour
             .WaitForCompletion();
         unit.dir = dir;
     }
-
-    /*   A* Å×½ºÆ®
-     *   
-     *   protected virtual bool ExpandSearch(Tile from, Tile to)
-     *   {
-     *      return to.content == null;
-     *   } 
-     *
-     * public virtual List<Tile> GetTilesInRange(Board board, Tile to)
-     * {
-     *     List<Tile> retValue = board.Search(unit.tile, ExpandSearch, to);
-     * 
-     *     if (retValue != null)
-     *     {
-     *         Filter(retValue);
-     *     }
-     *     else
-     *     {
-     *         retValue = new List<Tile>();
-     *     }
-     * 
-     *     return retValue;
-     * }
-     */
 }

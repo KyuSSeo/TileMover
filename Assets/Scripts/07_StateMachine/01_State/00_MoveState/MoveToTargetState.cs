@@ -27,13 +27,6 @@ public class MoveToTargetState : TurnState
             {
                 owner.ChangeState<MoveSequenceState>();
             }
-
-            /* A* Test
-            Movement m = turn.actor.GetComponent<Movement>();
-            Tile to = board.GetTile(pos);
-            m.GetTilesInRange(owner.board, to);
-            owner.ChangeState<MoveSequenceState>();
-            */
         }
         else
         {
