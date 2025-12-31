@@ -139,7 +139,7 @@ public class InputController : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit))
         {
-            Unit selectedUnit = hit.collider.GetComponent<Unit>();
+            PlaceObjcet selectedUnit = hit.collider.GetComponent<PlaceObjcet>();
             if (selectedUnit != null) 
             {
                 Debug.Log($"¿Ø¥÷ º±≈√: {selectedUnit.tile.pos}");

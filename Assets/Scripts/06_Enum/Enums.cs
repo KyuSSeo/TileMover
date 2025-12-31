@@ -1,14 +1,6 @@
 using UnityEngine;
 
 
-
-public enum UnitType
-{
-    None = 0,
-    Player = 1,
-    enemy = 2,
-    obstacle = 3,
-}
 // ¿Ø¥÷¿« πÊ«‚
 public enum Directions
 {

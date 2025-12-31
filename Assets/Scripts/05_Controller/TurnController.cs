@@ -9,9 +9,9 @@ public class TurnController : StateMachine
     public Transform tileSelectionIndicator;
     public Point pos;
     public GameObject charactor;
-    public Unit currentUnit;
+    public PlaceObjcet currentUnit;
     public Turn turn = new Turn();
-    public List<Unit> units = new List<Unit>();
+    public List<PlaceObjcet> units = new List<PlaceObjcet>();
     public AbilityMenuPanelController abilityMenuPanelController;
 
     public Tile currentTile { get { return board.GetTile(pos); } }

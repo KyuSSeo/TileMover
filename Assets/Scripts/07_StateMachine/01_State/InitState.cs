@@ -39,7 +39,7 @@ public class InitState : TurnState
             // 유닛 오브젝트 생성
             GameObject instance = Instantiate(owner.charactor) as GameObject;
 
-            Unit unit = instance.GetComponent<Unit>();
+            PlaceObjcet unit = instance.GetComponent<PlaceObjcet>();
             unit.Place(board.GetTile(pos));
             unit.DirMatch();
 

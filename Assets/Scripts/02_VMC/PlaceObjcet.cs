@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Unit : MonoBehaviour
+public class PlaceObjcet : MonoBehaviour
 {
     public Tile tile { get; protected set; }
     public Directions dir;

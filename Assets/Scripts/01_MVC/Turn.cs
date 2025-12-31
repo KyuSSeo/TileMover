@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class Turn
 {
-    public Unit actor;
+    public PlaceObjcet actor;
     public bool hasUnitMoved;
     public bool hasUnitActed;
     public bool lockMove;
     Tile startTile;
     Directions startDir;
 
-    public void Change(Unit current)
+    public void Change(PlaceObjcet current)
     {
         actor = current;
         hasUnitMoved = false;

@@ -10,7 +10,7 @@ public abstract class TurnState : State
     public Point pos { get { return owner.pos; } set { owner.pos = value; } }
     public CamRig camRig { get { return owner.camRig; } }
     public Turn turn { get { return owner.turn; } }
-    public List<Unit> units { get { return owner.units; } }
+    public List<PlaceObjcet> units { get { return owner.units; } }
     public AbilityMenuPanelController abilityMenuPanelController { get { return owner.abilityMenuPanelController; } }
     
     protected virtual void Awake()

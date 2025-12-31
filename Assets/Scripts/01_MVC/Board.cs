@@ -30,13 +30,13 @@ public class Board : MonoBehaviour
             t.Load(data.tiles[i]);
             tiles.Add(t.pos, t);
         }
-        if (data.units != null)
+        if (data.PlaceObjcet != null)
         {
-            for (int i = 0; i < data.units.Count; ++i)
+            for (int i = 0; i < data.PlaceObjcet.Count; ++i)
             {
                 // 좌표 설정
-                int x = (int)data.units[i].x;
-                int z = (int)data.units[i].z;
+                int x = (int)data.PlaceObjcet[i].x;
+                int z = (int)data.PlaceObjcet[i].z;
                 Point pos = new Point(x, z);
 
                 Tile targetTile = GetTile(pos);
@@ -50,7 +50,7 @@ public class Board : MonoBehaviour
 
                 // 생성
                 GameObject instance = Instantiate(wallPrefab) as GameObject;
-                Unit obj = instance.GetComponent<Unit>();
+                PlaceObjcet obj = instance.GetComponent<PlaceObjcet>();
 
                 // 타일 점유 설정
                 obj.Place(targetTile);
