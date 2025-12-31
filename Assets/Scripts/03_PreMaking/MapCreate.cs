@@ -26,7 +26,7 @@ public class MapCreate : MonoBehaviour
     #endregion
 
     public Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
-    public Dictionary<Point, PlaceObjcet> units = new Dictionary<Point, PlaceObjcet>();
+    public Dictionary<Point, PlaceObject> units = new Dictionary<Point, PlaceObject>();
 
     [SerializeField] public int width = 10;
     [SerializeField] public int depth = 10;
@@ -99,10 +99,10 @@ public class MapCreate : MonoBehaviour
         foreach (Tile tile in tiles.Values)
             board.tiles.Add(new Vector3(tile.pos.x, (float)tile.tileType, tile.pos.y));
 
-        board.PlaceObjcet = new List<Vector3>(units.Count);
-        foreach (PlaceObjcet unit in units.Values)
+        board.PlaceObject = new List<Vector3>(units.Count);
+        foreach (PlaceObject unit in units.Values)
         {
-            board.PlaceObjcet.Add(new Vector3(unit.tile.pos.x, 0, unit.tile.pos.y));
+            board.PlaceObject.Add(new Vector3(unit.tile.pos.x, 0, unit.tile.pos.y));
         }
 
         string fileName = string.Format("Assets/Resources/Levels/{1}.asset", filePath, name);
@@ -128,9 +128,9 @@ public class MapCreate : MonoBehaviour
             tiles.Add(t.pos, t);
         }
 
-        if (mapData.PlaceObjcet != null)
+        if (mapData.PlaceObject != null)
         {
-            foreach (Vector3 v in mapData.PlaceObjcet)
+            foreach (Vector3 v in mapData.PlaceObject)
             {
                 Point p = new Point((int)v.x, (int)v.z);
                 CreateUnit(p); // 해당 위치에 유닛 생성
@@ -181,7 +181,7 @@ public class MapCreate : MonoBehaviour
         return instance.GetComponent<Tile>();
     }
 
-    public PlaceObjcet CreateUnit(Point p)
+    public PlaceObject CreateUnit(Point p)
     {
         if (!tiles.ContainsKey(p))
             return null;
@@ -192,7 +192,7 @@ public class MapCreate : MonoBehaviour
         GameObject instance = Instantiate(unitPrefab) as GameObject;
         instance.transform.parent = transform;
 
-        PlaceObjcet unit = instance.GetComponent<PlaceObjcet>();
+        PlaceObject unit = instance.GetComponent<PlaceObject>();
         Tile t = tiles[p];
 
         unit.Place(t);
@@ -208,7 +208,7 @@ public class MapCreate : MonoBehaviour
         if (!units.ContainsKey(p))
             return;
 
-        PlaceObjcet unit = units[p];
+        PlaceObject unit = units[p];
 
         if (unit.tile != null) unit.tile.content = null;
 

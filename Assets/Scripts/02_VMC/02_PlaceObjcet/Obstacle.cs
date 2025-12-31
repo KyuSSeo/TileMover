@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Obstacle : PlaceObjcet
+public class Obstacle : PlaceObject
 {
     
 }

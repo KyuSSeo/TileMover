@@ -9,7 +9,7 @@ public class TurnController : StateMachine
     public Transform tileSelectionIndicator;
     public Point pos;
     public GameObject charactor;
-    public PlaceObjcet currentUnit;
+    public PlaceObject currentUnit;
     public Turn turn = new Turn();
     public List<Unit> units = new List<Unit>();
     public AbilityMenuPanelController abilityMenuPanelController;

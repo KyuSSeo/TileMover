@@ -7,11 +7,11 @@ public abstract class Movement : MonoBehaviour
 {
 
     public int range;
-    protected PlaceObjcet unit;
+    protected Unit unit;
 
     protected virtual void Awake()
     {
-        unit = GetComponent<PlaceObjcet>();
+        unit = GetComponent<Unit>();
     }
 
     public virtual List<Tile> GetTilesInRange(Board board)

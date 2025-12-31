@@ -1,7 +1,7 @@
 using UnityEngine;
 
 // РЏДж
-public class Unit : PlaceObjcet
+public class Unit : PlaceObject
 {
     
 }

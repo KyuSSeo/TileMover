@@ -30,13 +30,13 @@ public class Board : MonoBehaviour
             t.Load(data.tiles[i]);
             tiles.Add(t.pos, t);
         }
-        if (data.PlaceObjcet != null)
+        if (data.PlaceObject != null)
         {
-            for (int i = 0; i < data.PlaceObjcet.Count; ++i)
+            for (int i = 0; i < data.PlaceObject.Count; ++i)
             {
                 // ÁÂÇ¥ ¼³Á¤
-                int x = (int)data.PlaceObjcet[i].x;
-                int z = (int)data.PlaceObjcet[i].z;
+                int x = (int)data.PlaceObject[i].x;
+                int z = (int)data.PlaceObject[i].z;
                 Point pos = new Point(x, z);
 
                 Tile targetTile = GetTile(pos);

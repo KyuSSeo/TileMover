@@ -1,9 +1,14 @@
 using UnityEngine;
 
-public class PlaceObjcet : MonoBehaviour
+public class PlaceObject : MonoBehaviour
 {
     public Tile tile { get; protected set; }
     public Directions dir;
+
+    private void OnDestroy()
+    {
+        UnitRemoved();
+    }
 
     // 타일 점유
     public void Place(Tile target)
