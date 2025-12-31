@@ -11,7 +11,7 @@ public class TurnController : StateMachine
     public GameObject charactor;
     public PlaceObjcet currentUnit;
     public Turn turn = new Turn();
-    public List<PlaceObjcet> units = new List<PlaceObjcet>();
+    public List<Unit> units = new List<Unit>();
     public AbilityMenuPanelController abilityMenuPanelController;
 
     public Tile currentTile { get { return board.GetTile(pos); } }

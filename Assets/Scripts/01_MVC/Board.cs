@@ -50,7 +50,7 @@ public class Board : MonoBehaviour
 
                 // 생성
                 GameObject instance = Instantiate(wallPrefab) as GameObject;
-                PlaceObjcet obj = instance.GetComponent<PlaceObjcet>();
+                Obstacle obj = instance.GetComponent<Obstacle>();
 
                 // 타일 점유 설정
                 obj.Place(targetTile);

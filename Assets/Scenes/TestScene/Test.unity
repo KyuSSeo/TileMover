@@ -444,7 +444,7 @@ MonoBehaviour:
     x: 0
     y: 0
   charactor: {fileID: 845371849276412808, guid: 57a62fdc95894ec4f8b48be86adec0ce, type: 3}
-  currentUnit: {fileID: 4467198324181041254, guid: 57a62fdc95894ec4f8b48be86adec0ce, type: 3}
+  currentUnit: {fileID: 0}
   units: []
   abilityMenuPanelController: {fileID: 1237751396}
 --- !u!4 &966851574
