@@ -37,4 +37,3 @@ public enum States
     Selected = 1 << 0,
     Locked = 1 << 1
 }
-

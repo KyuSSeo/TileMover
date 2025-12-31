@@ -1,36 +1,56 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TIleHandleSelectState : TurnState
+public class TileeHandleSelectState : BaseAbilityMenuState
 {
-    List<Tile> tiles;
+
+    string[] Options = new string[] { "Build", "Remove" };
 
     public override void Enter()
     {
         Debug.Log("Tile Select State Enter");
         base.Enter();
-        TileObjectHandler handler = turn.actor.GetComponent<TileObjectHandler>();
-        board.SelectTiles(tiles);
     }
 
-    protected override void OnMove(object sender, InfoEventArgs<Point> e)
+    protected override void LoadMenu()
     {
-        SelectTile(e.info + pos);
+        if (menuOptions == null)
+            menuOptions = new List<string>();
+        SetOptions(Options);
+    }
+    protected override void Confirm()
+    {
+        switch (abilityMenuPanelController.selection)
+        {
+            case 0:
+                {
+                    owner.ChangeState<TileBuildState>();
+                    break;
+                }
+            case 1:
+                {
+                    owner.ChangeState<TileRemoveState>();
+                    break;
+                }
+        }
     }
 
-    protected override void OnFire(object sender, InfoEventArgs<int> e)
+    void SetCategory(int index)
     {
-        Debug.Log("TIle Select State OnFire");
-        if (e.info == 0)
-        {
-            if (tiles.Contains(owner.currentTile))
-            {
-                owner.ChangeState<TileHandleState>();
-            }
-        }
-        else
-        {
-            owner.ChangeState<CommandSelectionState>();
-        }
+        ActionSelectionState.category = index;
+        owner.ChangeState<ActionSelectionState>();
+    }
+
+    protected override void Cancel()
+    {
+        Debug.Log("Cancel: CommandSelectionState로 돌아갑니다.");
+        owner.ChangeState<CommandSelectionState>();
+    }
+
+    private void SetOptions(string[] options)
+    {
+        menuOptions.Clear();
+        for (int i = 0; i < options.Length; ++i)
+            menuOptions.Add(options[i]);
     }
 }

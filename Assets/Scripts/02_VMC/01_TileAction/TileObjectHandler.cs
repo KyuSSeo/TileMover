@@ -11,6 +11,8 @@ public class TileObjectHandler : MonoBehaviour
             Debug.LogWarning("타일이 이미 점유중입니다.");
         }
 
+        Point point = targetTile.pos;
+        Debug.Log($"BuildObstacle 실행됨 {point.x}, {point.y}");
         /*
          * 타일 생성 로직
          * 장애물 Place,
@@ -24,7 +26,8 @@ public class TileObjectHandler : MonoBehaviour
         {
             Debug.LogWarning("타일이 이미 비어있습니다.");
         }
-
+        Point point = targetTile.pos;
+        Debug.Log($"RemoveObstacle 실행됨 {point.x}, {point.y}");
         /*
          * 선택한 타일 위 오브젝트 Destroy 실행
          */

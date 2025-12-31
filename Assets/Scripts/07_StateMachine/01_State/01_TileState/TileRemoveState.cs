@@ -1,15 +1,14 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileHandleState : TurnState
+public class TileRemoveState : TurnState
 {
     List<Tile> tiles;
     TileObjectHandler handler;
 
-    public override void Enter() 
+    public override void Enter()
     {
-        Debug.Log("Tile Handle State Enter");
+        Debug.Log("Tile Remove Enter");
         base.Enter();
         handler = turn.actor.GetComponent<TileObjectHandler>();
         board.SelectTiles(tiles);
@@ -24,17 +23,8 @@ public class TileHandleState : TurnState
 
     protected override void OnFire(object sender, InfoEventArgs<int> e)
     {
-        Debug.Log("TIle Select State OnFire");
+        Debug.Log("Tile Remove OnFire");
         if (e.info == 0)
-        {
-            if (tiles.Contains(owner.currentTile))
-            {
-                owner.ChangeState<CommandSelectionState>();
-                handler.BuildObstacle(owner.currentTile);
-                turn.hasUnitActed = true;
-            }
-        }
-        else if (e.info == 1)
         {
             if (tiles.Contains(owner.currentTile))
             {

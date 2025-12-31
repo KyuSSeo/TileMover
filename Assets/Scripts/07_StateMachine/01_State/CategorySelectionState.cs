@@ -10,7 +10,8 @@ public class CategorySelectionState : BaseAbilityMenuState
         if (menuOptions == null)
         {
             menuTitle = "Action";
-            menuOptions = new List<string>(2);
+            menuOptions = new List<string>(3);
+            menuOptions.Add("TileControl");
             menuOptions.Add("Action1");
             menuOptions.Add("Action2");
         }
@@ -25,9 +26,12 @@ public class CategorySelectionState : BaseAbilityMenuState
         switch (abilityMenuPanelController.selection)
         {
             case 0:
-                SetCategory(0);
+                owner.ChangeState<TileeHandleSelectState>();
                 break;
             case 1:
+                SetCategory(0);
+                break;
+            case 2:
                 SetCategory(1);
                 break;
         }
