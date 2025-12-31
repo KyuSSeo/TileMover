@@ -37,7 +37,7 @@ public class TileBuildState : TurnState
         }
         else
         {
-            owner.ChangeState<TileeHandleSelectState>();
+            owner.ChangeState<TileHandleSelectState>();
         }
     }
 }

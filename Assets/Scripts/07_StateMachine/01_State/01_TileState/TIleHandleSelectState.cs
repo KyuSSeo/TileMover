@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TileeHandleSelectState : BaseAbilityMenuState
+public class TileHandleSelectState : BaseAbilityMenuState
 {
 
     string[] Options = new string[] { "Build", "Remove" };
@@ -17,6 +17,7 @@ public class TileeHandleSelectState : BaseAbilityMenuState
         if (menuOptions == null)
             menuOptions = new List<string>();
         SetOptions(Options);
+        abilityMenuPanelController.Show(menuTitle, menuOptions);
     }
     protected override void Confirm()
     {

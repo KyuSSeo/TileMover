@@ -16,7 +16,11 @@ public static class RectTransformAnimationExtensions
 
     public static Tweener AnchorTo(this RectTransform t, Vector3 position, float duration, Func<float, float, float, float> equation)
     {
-        RectTransformAnchorPositionTweener tweener = t.gameObject.AddComponent<RectTransformAnchorPositionTweener>();
+        var tweener = t.GetComponent<RectTransformAnchorPositionTweener>();
+        if (tweener == null)
+        {
+            tweener = t.gameObject.AddComponent<RectTransformAnchorPositionTweener>();
+        }
         tweener.startValue = t.anchoredPosition;
         tweener.endValue = position;
         tweener.easingControl.duration = duration;

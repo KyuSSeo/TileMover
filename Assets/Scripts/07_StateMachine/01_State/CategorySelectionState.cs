@@ -26,7 +26,7 @@ public class CategorySelectionState : BaseAbilityMenuState
         switch (abilityMenuPanelController.selection)
         {
             case 0:
-                owner.ChangeState<TileeHandleSelectState>();
+                owner.ChangeState<TileHandleSelectState>();
                 break;
             case 1:
                 SetCategory(0);

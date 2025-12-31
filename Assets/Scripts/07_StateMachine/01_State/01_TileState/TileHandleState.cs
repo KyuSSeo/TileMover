@@ -54,7 +54,7 @@ public class TileActionState : TurnState
         }
         else
         {
-            owner.ChangeState<TileeHandleSelectState>();
+            owner.ChangeState<TileHandleSelectState>();
         }
     }
     void RefreshRange()

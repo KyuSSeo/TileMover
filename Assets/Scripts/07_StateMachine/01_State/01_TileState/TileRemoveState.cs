@@ -37,7 +37,7 @@ public class TileRemoveState : TurnState
         }
         else
         {
-            owner.ChangeState<TileeHandleSelectState>();
+            owner.ChangeState<TileHandleSelectState>();
         }
     }
 }
