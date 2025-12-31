@@ -44,7 +44,7 @@ public class InitState : TurnState
             unit.DirMatch();
 
             // 이동거리 설정
-            Movement moveRange = instance.AddComponent<WalkMovement>();
+            Movement moveRange = instance.GetComponent<WalkMovement>();
             moveRange.range = (int)mapData.spawnPoints[i].y;
 
             // 턴 목록에 추가
