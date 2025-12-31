@@ -5,6 +5,7 @@ public class Unit : MonoBehaviour
     public Tile tile { get; protected set; }
     public Directions dir;
 
+    // 타일 점유
     public void Place(Tile target)
     {
         if (tile != null && tile.content == gameObject)
@@ -25,9 +26,10 @@ public class Unit : MonoBehaviour
         }
     }
 
+    // 타일 위 위치, 방향 조정
     public void DirMatch()
     {
-        transform.localPosition = tile.center;
+        transform.localPosition = tile.center + new Vector3(0, 0.5f, 0);
         transform.localEulerAngles = dir.ToEuler();
     }
 }

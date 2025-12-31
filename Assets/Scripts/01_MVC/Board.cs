@@ -8,7 +8,7 @@ using UnityEngine.Splines.ExtrusionShapes;
 public class Board : MonoBehaviour
 {
     [SerializeField] private GameObject tilePrefab;
-    [SerializeField] public GameObject wallPrefab;
+    [SerializeField] private GameObject wallPrefab;
 
     public Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
 
@@ -60,9 +60,7 @@ public class Board : MonoBehaviour
 
                 // 타일 점유 설정
                 obj.Place(targetTile);
-                Vector3 spawnPos = targetTile.center;
-                spawnPos.y += 0.5f;
-                instance.transform.position = spawnPos;
+                obj.DirMatch();
             }
         }
     }
