@@ -11,6 +11,8 @@ public class TileBuildState : TurnState
         Debug.Log("Tile Build Enter");
         base.Enter();
         handler = turn.actor.GetComponent<TileObjectHandler>();
+        tiles = new List<Tile>();
+        tiles.Add(owner.currentTile);
         board.SelectTiles(tiles);
         if (tiles != null && tiles.Count > 0)
             board.SelectTiles(tiles);

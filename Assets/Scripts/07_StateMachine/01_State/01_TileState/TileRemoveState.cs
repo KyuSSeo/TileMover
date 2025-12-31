@@ -12,6 +12,8 @@ public class TileRemoveState : TurnState
         base.Enter();
         handler = turn.actor.GetComponent<TileObjectHandler>();
         board.SelectTiles(tiles);
+        tiles = new List<Tile>();
+        tiles.Add(owner.currentTile);
         if (tiles != null && tiles.Count > 0)
             board.SelectTiles(tiles);
     }
