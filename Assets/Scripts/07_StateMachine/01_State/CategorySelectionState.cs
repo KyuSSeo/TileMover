@@ -42,14 +42,6 @@ public class CategorySelectionState : BaseAbilityMenuState
         owner.ChangeState<CommandSelectionState>();
     }
 
-    void Attack()
-    {
-        turn.hasUnitActed = true;
-        if (turn.hasUnitMoved)
-            turn.lockMove = true;
-        owner.ChangeState<CommandSelectionState>();
-    }
-
     void SetCategory(int index)
     {
         ActionSelectionState.category = index;
