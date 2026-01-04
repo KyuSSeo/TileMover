@@ -3,11 +3,10 @@ using UnityEngine;
 public class TileObjectHandler : MonoBehaviour
 {
     [SerializeField] public GameObject obstaclePrefab;
+    [SerializeField] private int wallDurability;
 
     public void BuildObstacle(Tile targetTile)
     {
-        
-
         Point point = targetTile.pos;
         Debug.Log($"BuildObstacle 角青凳 {point.x}, {point.y}");
         
@@ -20,6 +19,7 @@ public class TileObjectHandler : MonoBehaviour
         GameObject instance = Instantiate(obstaclePrefab);
         Obstacle obj = instance.GetComponent<Obstacle>();
         obj.Place(targetTile);
+        obj.SetDurability(wallDurability);
         obj.DirMatch();
         /*
          * 鸥老 积己 肺流
@@ -38,8 +38,8 @@ public class TileObjectHandler : MonoBehaviour
         Debug.Log($"RemoveObstacle 角青凳 {point.x}, {point.y}");
         Obstacle obj = targetTile.content.GetComponent<Obstacle>();
         if (obj != null) 
-        { 
-            obj.DestroyObj();
+        {
+            obj.DurabilityDown();
         }
         else 
         {
