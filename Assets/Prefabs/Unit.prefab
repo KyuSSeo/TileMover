@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obstaclePrefab: {fileID: 7183492937010877523, guid: 0f51b49a474704c4f8c13bdb401ed597, type: 3}
+  wallDurability: 2
 --- !u!1 &7715680827961441151
 GameObject:
   m_ObjectHideFlags: 0

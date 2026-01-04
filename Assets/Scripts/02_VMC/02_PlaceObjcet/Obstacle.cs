@@ -11,7 +11,7 @@ public class Obstacle : PlaceObject
     }
     public void DurabilityDown()
     {
-        if (durability-- < 0)
+        if (durability-- <= 0)
         {
             DestroyObj();
         }

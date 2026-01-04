@@ -21,11 +21,6 @@ public class TileObjectHandler : MonoBehaviour
         obj.Place(targetTile);
         obj.SetDurability(wallDurability);
         obj.DirMatch();
-        /*
-         * 타일 생성 로직
-         * 장애물 Place,
-         * 장애물 DirMatch 실행
-         */
     }
 
     public void RemoveObstacle(Tile targetTile)
@@ -45,8 +40,5 @@ public class TileObjectHandler : MonoBehaviour
         {
             Debug.LogWarning("잘못된 타겟 설정");
         }
-        /*
-         * 선택한 타일 위 오브젝트 Destroy 실행
-         */
     }
 }
