@@ -9,4 +9,6 @@ public class MapData : ScriptableObject
     public List<Vector3> PlaceObject;
     // 유닛 스폰지점 
     public List<Vector3> spawnPoints;
+    // 목적지
+    public Vector3 goalPoint;
 }

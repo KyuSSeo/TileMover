@@ -6,6 +6,7 @@ public class Turn
     public bool hasUnitMoved;
     public bool hasUnitActed;
     public bool lockMove;
+    public bool isTurn;
     Tile startTile;
     Directions startDir;
 
