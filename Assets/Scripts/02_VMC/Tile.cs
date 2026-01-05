@@ -7,6 +7,8 @@ public class Tile : MonoBehaviour
     public int height = 1;
 
     public GameObject content;
+    public TileEffect tileEffect;
+
     //  높이 정보
     public const float stepHeight = 1f;
     
