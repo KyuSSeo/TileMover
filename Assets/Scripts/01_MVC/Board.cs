@@ -64,8 +64,8 @@ public class Board : MonoBehaviour
             goalPoint = new Point((int)data.goalPoint.x, (int)data.goalPoint.z);
             Tile targetTile = GetTile(goalPoint);
             GameObject instance = Instantiate(goalPrefab) as GameObject;
-            TileEffect obj = instance.GetComponent<TileEffect>();
-            obj.EffPlace(targetTile);
+            GoalPoint obj = instance.GetComponent<GoalPoint>();
+            obj.Place(targetTile);
         }
     }
 
