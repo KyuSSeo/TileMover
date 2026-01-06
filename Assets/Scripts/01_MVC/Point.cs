@@ -62,7 +62,16 @@ public class Point
         return new Point(p1.x - p2.x, p1.y - p2.y);
     }
 
-
+    /// <summary>
+    /// 두 타일 사이 맨해튼 거리를 반환
+    /// </summary>
+    /// <param name="a"></param>
+    /// <param name="b"></param>
+    /// <returns></returns>
+    public static int DistanceManhattan(Point a, Point b)
+    {
+        return Mathf.Abs(a.x - b.x) + Mathf.Abs(a.y - b.y);
+    }
 
     /// <summary>
     /// 객체가 타입이 Point 타입이고 좌표가 같으면 true.
