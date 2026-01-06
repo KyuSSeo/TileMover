@@ -755,6 +755,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tilePrefab: {fileID: 3365108360146080296, guid: f1e13828cbf21954c985b76fd846eeee, type: 3}
   wallPrefab: {fileID: 7183492937010877523, guid: 0f51b49a474704c4f8c13bdb401ed597, type: 3}
+  goalPrefab: {fileID: 3365108360146080296, guid: c823ab36b2558e04a926a9146dd0cf14, type: 3}
+  goalPoint:
+    x: 0
+    y: 0
 --- !u!4 &828042878
 Transform:
   m_ObjectHideFlags: 0

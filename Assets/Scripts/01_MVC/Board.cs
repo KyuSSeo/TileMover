@@ -66,6 +66,7 @@ public class Board : MonoBehaviour
             GameObject instance = Instantiate(goalPrefab) as GameObject;
             GoalPoint obj = instance.GetComponent<GoalPoint>();
             obj.Place(targetTile);
+            obj.DirMatch();
         }
     }
 

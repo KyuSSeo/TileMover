@@ -40,7 +40,7 @@ public class PlaceObject : MonoBehaviour
     // 타일 위 위치, 방향 조정
     public void DirMatch()
     {
-        transform.localPosition = tile.center + new Vector3(0, 0.5f, 0);
+        transform.localPosition = tile.center + new Vector3(0, 0, 0);
         transform.localEulerAngles = dir.ToEuler();
     }
 }
