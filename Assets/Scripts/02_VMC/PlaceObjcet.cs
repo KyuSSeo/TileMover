@@ -7,11 +7,11 @@ public class PlaceObject : MonoBehaviour
 
     private void OnDestroy()
     {
-        UnitRemoved();
+        ObjectRemoved();
     }
 
     // 타일 배치(점유)
-    public void Place(Tile target)
+    public virtual void Place(Tile target)
     {
         if (tile != null && tile.content == gameObject)
             tile.content = null;
@@ -24,12 +24,12 @@ public class PlaceObject : MonoBehaviour
     // 유닛 파괴
     public void DestroyObj()
     {
-        UnitRemoved();
+        ObjectRemoved();
         Destroy(gameObject);
     }
 
     // 타일 점유중인 유닛 제거시 타일정보 갱신
-    public void UnitRemoved()
+    public virtual void ObjectRemoved()
     {
         if (tile != null && tile.content == gameObject)
         {

@@ -7,8 +7,10 @@ public class Board : MonoBehaviour
 {
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private GameObject wallPrefab;
+    [SerializeField] private GameObject goalPrefab;
 
     public Dictionary<Point, Tile> tiles = new Dictionary<Point, Tile>();
+    public Point goalPoint;
 
     private Color selectedTileColor = new Color(0, 1, 1, 1);
     private Color defaultTileColor = new Color(1, 1, 1, 1);
@@ -56,6 +58,14 @@ public class Board : MonoBehaviour
                 obj.Place(targetTile);
                 obj.DirMatch();
             }
+        }
+        if (data.goalPoint != null)
+        {
+            goalPoint = new Point((int)data.goalPoint.x, (int)data.goalPoint.z);
+            Tile targetTile = GetTile(goalPoint);
+            GameObject instance = Instantiate(goalPrefab) as GameObject;
+            TileEffect obj = instance.GetComponent<TileEffect>();
+            obj.EffPlace(targetTile);
         }
     }
 
