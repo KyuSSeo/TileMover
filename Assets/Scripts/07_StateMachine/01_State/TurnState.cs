@@ -49,4 +49,9 @@ public abstract class TurnState : State
         pos = p;
         tileSelectionIndicator.localPosition = board.tiles[p].center;
     }
+
+    protected virtual int GetGoalDistance()
+    {
+        return Point.DistanceManhattan(pos, board.goalPoint);
+    }
 }
