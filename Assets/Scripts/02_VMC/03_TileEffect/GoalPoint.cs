@@ -9,9 +9,14 @@ public class GoalPoint : TileEffect
 
         if (unit != null)
         {
-            Debug.Log($"게임 종료! {unit.name}가 목적지에 도착했습니다.");
+            Debug.Log($"게임 종료 {unit.name}가 목적지에 도착했습니다.");
 
-            // TODO : 승리/패배 처리 로직 추가
+            GameEnd();
         }
+    }
+
+    public void GameEnd()
+    {
+
     }
 }
