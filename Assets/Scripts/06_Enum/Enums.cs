@@ -28,6 +28,12 @@ public enum TilePathFinding
     ClosePath = 2,
 }
 
+public enum PlayerType
+{
+    None,
+    Human,
+    Ai,
+}
 
 // 행동여부 판단용도
 [System.Flags]

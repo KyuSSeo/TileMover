@@ -8,7 +8,7 @@ public class Unit : PlaceObject
     {
         base.Place(target);
 
-        if (target.tileEffect != null)
+        if (target != null && target.tileEffect != null)
         {
             target.tileEffect.OnUnitEnter(this);
         }

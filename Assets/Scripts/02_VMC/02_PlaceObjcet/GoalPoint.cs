@@ -7,13 +7,12 @@ public class GoalPoint : TileEffect
     {
         if (unit != null)
         {
-            Debug.Log($"게임 종료 {unit.name}가 목적지에 도착했습니다.");
             GameEnd();
         }
     }
 
     public void GameEnd()
     {
-
+        Debug.Log($"게임 종료조건 만족");
     }
 }
