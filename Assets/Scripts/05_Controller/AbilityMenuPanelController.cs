@@ -137,7 +137,7 @@ public class AbilityMenuPanelController : MonoBehaviour
 
     public void ResultShow(string name)
     {
-        menuCanvas.SetActive(false);
+        menuCanvas.SetActive(true);
         Clear();
         resultLabel.text = name;
     }

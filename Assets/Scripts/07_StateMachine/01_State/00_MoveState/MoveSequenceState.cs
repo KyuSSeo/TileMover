@@ -22,7 +22,10 @@ public class MoveSequenceState : TurnState
             // 이동 완료시 게임종료로 전이
             owner.ChangeState<GameEndState>();
         }
-        owner.ChangeState<CommandSelectionState>();
+        else
+        {
+            owner.ChangeState<CommandSelectionState>();
+        }
     }
 
     private bool CheckGameEnd()
