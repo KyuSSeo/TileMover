@@ -11,7 +11,8 @@ public class AbilityMenuPanelController : MonoBehaviour
     const string EntryPoolKey = "AbilityMenuPanel.Entry";
     const int MenuCount = 4;
     [SerializeField] GameObject entryPrefab;
-    [SerializeField] TextMeshProUGUI titleLabel;
+    [SerializeField] TextMeshProUGUI menuTitleLabel;
+    [SerializeField] TextMeshProUGUI resultLabel;
     [SerializeField] Panel panel;
     [SerializeField] GameObject menuCanvas;
     [SerializeField] GameObject resultCanvus;
@@ -122,7 +123,7 @@ public class AbilityMenuPanelController : MonoBehaviour
         // 메뉴 캔버스 활성화
         menuCanvas.SetActive(true);
         Clear();
-        titleLabel.text = title;
+        menuTitleLabel.text = title;
         // 항목 생성 및 초기화
         for (int i = 0; i < options.Count; ++i)
         {
@@ -132,6 +133,13 @@ public class AbilityMenuPanelController : MonoBehaviour
         }
         SetSelection(0);
         TogglePos(ShowKey);
+    }
+
+    public void ResultShow(string name)
+    {
+        menuCanvas.SetActive(false);
+        Clear();
+        resultLabel.text = name;
     }
     //  잠금 설정
     public void SetLocked(int index, bool value)

@@ -273,7 +273,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &108313427
 RectTransform:
   m_ObjectHideFlags: 0
@@ -373,7 +373,7 @@ GameObject:
   - component: {fileID: 120759595}
   - component: {fileID: 120759600}
   m_Layer: 0
-  m_Name: Panel
+  m_Name: MenuPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1583,9 +1583,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   entryPrefab: {fileID: 929559572}
-  titleLabel: {fileID: 590925733}
+  menuTitleLabel: {fileID: 590925733}
+  resultLabel: {fileID: 43780192}
   panel: {fileID: 120759596}
-  canvas: {fileID: 1478525606}
+  menuCanvas: {fileID: 120759593}
+  resultCanvus: {fileID: 108313426}
 --- !u!1 &1507647908
 GameObject:
   m_ObjectHideFlags: 0

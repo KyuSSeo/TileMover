@@ -7,6 +7,8 @@ public class GameEndState : TurnState
     {
         Debug.Log("Enter GameEndState");
         base.Enter();
+        abilityMenuPanelController.MenuHide();
+        abilityMenuPanelController.ResultShow(owner.turn.actor.name + "Win");
     }
 
 

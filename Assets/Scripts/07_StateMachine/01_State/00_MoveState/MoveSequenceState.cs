@@ -9,6 +9,7 @@ public class MoveSequenceState : TurnState
         base.Enter();
         StartCoroutine("Sequence");
         owner.camRig.FollowTarget(owner.turn.actor.transform);
+        isGameEnd = CheckGameEnd();
     }
 
     IEnumerator Sequence()
@@ -16,7 +17,6 @@ public class MoveSequenceState : TurnState
         Movement m = turn.actor.GetComponent<Movement>();
         yield return StartCoroutine(m.Traverse(owner.currentTile));
         turn.hasUnitMoved = true;
-        isGameEnd = CheckGameEnd();
         if (isGameEnd == true)
         {
             // 이동 완료시 게임종료로 전이
