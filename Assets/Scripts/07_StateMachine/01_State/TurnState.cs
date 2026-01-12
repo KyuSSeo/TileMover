@@ -12,7 +12,8 @@ public abstract class TurnState : State
     public Turn turn { get { return owner.turn; } }
     public List<Unit> units { get { return owner.units; } }
     public AbilityMenuPanelController abilityMenuPanelController { get { return owner.abilityMenuPanelController; } }
-    
+
+    public bool isGameEnd = false;
     
     protected virtual void Awake()
     {

@@ -11,8 +11,9 @@ public class GoalPoint : TileEffect
         }
     }
 
-    public void GameEnd()
+    public bool GameEnd()
     {
         Debug.Log($"게임 종료조건 만족");
+        return true;
     }
 }
