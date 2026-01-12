@@ -13,7 +13,8 @@ public class AbilityMenuPanelController : MonoBehaviour
     [SerializeField] GameObject entryPrefab;
     [SerializeField] TextMeshProUGUI titleLabel;
     [SerializeField] Panel panel;
-    [SerializeField] GameObject canvas;
+    [SerializeField] GameObject menuCanvas;
+    [SerializeField] GameObject resultCanvus;
     List<AbilityMenuEntry> menuEntries = new List<AbilityMenuEntry>(MenuCount);
     public int selection { get; private set; }
 
@@ -60,7 +61,8 @@ public class AbilityMenuPanelController : MonoBehaviour
     {
         //  비활성화, 숨기기
         panel.SetPosition(HideKey, false);
-        canvas.SetActive(false);
+        menuCanvas.SetActive(false);
+        resultCanvus.SetActive(false);
     }
 
     // 패널 위치 전환 애니메이션
@@ -115,10 +117,10 @@ public class AbilityMenuPanelController : MonoBehaviour
     }
 
     // 메뉴 표시
-    public void Show(string title, List<string> options)
+    public void MenuShow(string title, List<string> options)
     {
         // 메뉴 캔버스 활성화
-        canvas.SetActive(true);
+        menuCanvas.SetActive(true);
         Clear();
         titleLabel.text = title;
         // 항목 생성 및 초기화
@@ -144,7 +146,7 @@ public class AbilityMenuPanelController : MonoBehaviour
     }
 
     // 메뉴 숨기기
-    public void Hide()
+    public void MenuHide()
     {
         Tweener t = TogglePos(HideKey);
         t.easingControl.completedEvent += delegate (object sender, System.EventArgs e)
@@ -153,7 +155,7 @@ public class AbilityMenuPanelController : MonoBehaviour
             if (panel.CurrentPosition == panel[HideKey])
             {
                 Clear();
-                canvas.SetActive(false);
+                menuCanvas.SetActive(false);
             }
         };
     }

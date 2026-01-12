@@ -16,7 +16,7 @@ public class CategorySelectionState : BaseAbilityMenuState
             menuOptions.Add("Action2");
         }
 
-        abilityMenuPanelController.Show(menuTitle, menuOptions);
+        abilityMenuPanelController.MenuShow(menuTitle, menuOptions);
     }
 
     // 여기에서 행동의 대분류를 추가합니다.

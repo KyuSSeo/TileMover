@@ -17,7 +17,7 @@ public class TileHandleSelectState : BaseAbilityMenuState
         if (menuOptions == null)
             menuOptions = new List<string>();
         SetOptions(Options);
-        abilityMenuPanelController.Show(menuTitle, menuOptions);
+        abilityMenuPanelController.MenuShow(menuTitle, menuOptions);
     }
     protected override void Confirm()
     {

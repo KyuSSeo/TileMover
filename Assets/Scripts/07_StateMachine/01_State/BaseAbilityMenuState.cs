@@ -17,7 +17,7 @@ public abstract class BaseAbilityMenuState : TurnState
     public override void Exit()
     {
         base.Exit();
-        abilityMenuPanelController.Hide();
+        abilityMenuPanelController.MenuHide();
     }
 
     protected override void OnFire(object sender, InfoEventArgs<int> e)

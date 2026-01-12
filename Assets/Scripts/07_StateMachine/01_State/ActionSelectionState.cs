@@ -25,7 +25,7 @@ public class ActionSelectionState : BaseAbilityMenuState
             SetOptions(Options2);
         }
 
-        abilityMenuPanelController.Show(menuTitle, menuOptions);
+        abilityMenuPanelController.MenuShow(menuTitle, menuOptions);
     }
 
     // 세부 행동 추가
