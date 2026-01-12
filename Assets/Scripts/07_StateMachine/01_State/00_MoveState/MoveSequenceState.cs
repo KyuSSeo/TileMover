@@ -16,11 +16,25 @@ public class MoveSequenceState : TurnState
         Movement m = turn.actor.GetComponent<Movement>();
         yield return StartCoroutine(m.Traverse(owner.currentTile));
         turn.hasUnitMoved = true;
+        isGameEnd = CheckGameEnd();
         if (isGameEnd == true)
         {
             // 이동 완료시 게임종료로 전이
             owner.ChangeState<GameEndState>();
         }
         owner.ChangeState<CommandSelectionState>();
+    }
+
+    private bool CheckGameEnd()
+    {
+        Tile currentTile = owner.currentTile;
+        if (currentTile != null && currentTile.tileEffect != null)
+        {
+            if (currentTile.tileEffect is GoalPoint)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
