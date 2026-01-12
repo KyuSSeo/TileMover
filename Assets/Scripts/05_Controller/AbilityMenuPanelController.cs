@@ -137,10 +137,10 @@ public class AbilityMenuPanelController : MonoBehaviour
 
     public void ResultShow(string name)
     {
-        menuCanvas.SetActive(true);
-        Clear();
+        resultCanvus.SetActive(true);
         resultLabel.text = name;
     }
+
     //  잠금 설정
     public void SetLocked(int index, bool value)
     {
